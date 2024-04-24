@@ -8,6 +8,10 @@ COPY package.json pnpm-lock.yaml ./
 
 RUN pnpm i
 
+COPY prisma ./
+
+RUN npx prisma generate
+
 COPY . .
 
 CMD [ "pnpm", "start:dev" ]

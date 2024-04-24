@@ -13,7 +13,9 @@ async function main() {
     methods: ['POST', 'GET', 'DELETE', 'PATCH', 'PUT', 'OPTIONS']
   })
 
-  await app.listen(port, () => console.log('Server started on port', port))
+  await app.listen(port, () =>
+    console.log('🪼 Server started on http://localhost:' + port)
+  )
 }
 
 main()
