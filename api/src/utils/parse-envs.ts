@@ -6,7 +6,7 @@ import { z } from 'zod'
 export const parseEnvs = <S extends z.AnyZodObject>(schema: S, prefix = '') => {
   const logger = new Logger()
 
-  const { parsed } = config({ path: `${prefix}.env` })
+  const { parsed } = config({ path: `.env${prefix}` })
 
   type EnvSchema = z.infer<typeof schema>
 
