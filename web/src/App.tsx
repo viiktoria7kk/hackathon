@@ -1,18 +1,16 @@
-import { useEffect } from 'react'
-import { Button } from '~/components/button'
+import { Outlet } from 'react-router-dom'
+import Wrapper from '~/containers/layouts/Wrapper'
+import Header from '~/containers/layouts/Header'
+import Footer from '~/containers/layouts/Footer'
 
 const App = () => {
-  useEffect(() => {
-    fetch(import.meta.env.VITE_SERVER_URL)
-      .then((r) => r.json())
-      .then(console.log)
-      .catch(console.error)
-  }, [])
-
   return (
     <>
-      {import.meta.env.VITE_SERVER_URL}
-      <Button>Click me</Button>
+      <Header />
+      <Wrapper className='relative flex flex-col min-h-screen -full'>
+        <Outlet />
+      </Wrapper>
+      <Footer />
     </>
   )
 }
