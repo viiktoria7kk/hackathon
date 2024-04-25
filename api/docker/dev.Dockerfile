@@ -1,6 +1,6 @@
 FROM node:20-alpine3.19
 
-WORKDIR /app
+WORKDIR /hackathon
 
 RUN npm i -g pnpm
 
