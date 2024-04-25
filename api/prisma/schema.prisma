@@ -14,16 +14,30 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Roles {
+  USER
+  VOLONTEER
+}
+
+enum Categories {
+  PSYCHOLOGICAL_SUPPORT
+  HUMANITARIAN_AID
+  LEGAL_ASSISTANCE
+  HOTLINE_SERVICES
+  MEDICAL_HELP
+  INITIATIVES_AND_PROGRAMS
+}
 
 model User {
   id String @id @default(uuid())
   firstName String
   lastName String
+  email String
   phone String
-  isVolunteer Boolean
+  bio String
+  role       Roles    @default(USER)
   avatar String
-  email String @unique
-  posts_id Post[]
+  posts Post[]
 
   @@map("users")
 }
@@ -33,9 +47,10 @@ model Post {
   title String
   description String
   content String
-  location String
-  created_data DateTime
+  category Categories
+  isActivated Boolean
   user_id String
+  timestamp DateTime @default(now())
   user User @relation(fields: [user_id], references: [id])
 
   @@map("posts")
