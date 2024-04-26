@@ -48,6 +48,10 @@ export class AuthService {
         password: hashedPassword
       }
     })
+
+    return {
+      message: "Вітаємо вас з успішною реєстрацією!"
+    }
   }
 
   async signIn(dto: SignInDto) {
