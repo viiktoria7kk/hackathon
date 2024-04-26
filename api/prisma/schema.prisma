@@ -33,6 +33,7 @@ model User {
   firstName String
   lastName String
   email String
+  password String
   phone String
   bio String
   role       Roles    @default(USER)
@@ -50,7 +51,7 @@ model Post {
   category Categories
   isActivated Boolean
   user_id String
-  timestamp DateTime @default(now())
+  createdAt DateTime @default(now()) @map("created_at")
   user User @relation(fields: [user_id], references: [id])
 
   @@map("posts")

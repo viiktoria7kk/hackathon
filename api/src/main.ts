@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core'
 
-import { AppModule } from '@core/app.module'
+import { AppModule } from '@modules/app.module'
 import { env } from '@configs/env.config'
 
 async function main() {
