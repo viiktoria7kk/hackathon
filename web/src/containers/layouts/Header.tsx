@@ -6,7 +6,7 @@ import Wrapper from '~/containers/layouts/Wrapper'
 
 import { Routes } from '~/constants/routes'
 
-import { cn } from '~/utils/Utils'
+import { cn } from '~/utils'
 
 type HeaderProps = {
   className?: string
@@ -29,11 +29,11 @@ const Header: FC<HeaderProps> = ({ className }) => {
                 className={cn(buttonVariants({ variant: 'ghost' }))}
                 to={Routes.SIGN_IN}
               >
-                Login
+                Увійти
               </Link>
               <span aria-hidden='true' className='h-8 w-px bg-gray-200' />
               <Link className={cn(buttonVariants())} to={Routes.SIGN_UP}>
-                Register
+                Зареєструватися
               </Link>
             </div>
           </div>

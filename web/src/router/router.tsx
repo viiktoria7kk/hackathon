@@ -4,20 +4,21 @@ import {
   createRoutesFromElements
 } from 'react-router-dom'
 
-import App from '~/App'
-import Home from '~/pages/Home'
 import MainLayout from '~/containers/layouts/MainLayout'
 import AuthLayout from '~/containers/layouts/AuthLayout'
 
-import { Routes } from '~/constants/routes'
+import App from '~/App'
+import Home from '~/pages/Home'
 import SignIn from '~/pages/SignIn'
 import SignUp from '~/pages/SignUp'
+
+import { Routes } from '~/constants/routes'
 
 export const routerConfig = (
   <Route element={<App />} path='/'>
     <Route element={<MainLayout />}>
       <Route element={<Home />} index />
-      <Route element={<div>Requests</div>} />
+      <Route element={<div>Requests</div>} path={Routes.REQUESTS} />
       <Route element={<div>Settings</div>} path={Routes.SETTINGS} />
     </Route>
     <Route element={<AuthLayout />} path={'/auth'}>

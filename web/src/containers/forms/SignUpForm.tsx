@@ -8,7 +8,7 @@ import { Input } from '~/components/Input'
 import { Label } from '~/components/Label'
 import { ArrowRight, Loader2 } from 'lucide-react'
 
-import { cn } from '~/utils/Utils'
+import { cn } from '~/utils'
 import {
   AuthCredentialsValiador,
   TAuthCredentialsValiador
