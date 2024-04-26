@@ -50,15 +50,9 @@ model Post {
   content String
   category Categories
   isActivated Boolean
-<<<<<<< HEAD
-  user_id String
   createdAt DateTime @default(now()) @map("created_at")
-  user User @relation(fields: [user_id], references: [id])
-=======
   userId String
-  createdAt DateTime @default(now())
   user User @relation(fields: [userId], references: [id])
->>>>>>> d217e4b (feature: added auth)
 
   @@map("posts")
 }
