@@ -27,13 +27,13 @@ const Header: FC<HeaderProps> = ({ className }) => {
             <div className='flex items-center gap-3'>
               <Link
                 className={cn(buttonVariants({ variant: 'ghost' }))}
-                to={Routes.SIGN_IN}
+                to={Routes.SIGN_UP}
               >
-                Увійти
+                Зареєструватися
               </Link>
               <span aria-hidden='true' className='h-8 w-px bg-gray-200' />
-              <Link className={cn(buttonVariants())} to={Routes.SIGN_UP}>
-                Зареєструватися
+              <Link className={cn(buttonVariants())} to={Routes.SIGN_IN}>
+                Увійти
               </Link>
             </div>
           </div>
