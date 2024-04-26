@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import Wrapper from '~/containers/layouts/Wrapper'
 
-import { cn } from '~/utils/utils'
+import { cn } from '~/utils/Utils'
 
 type FooterProps = {
   className?: string

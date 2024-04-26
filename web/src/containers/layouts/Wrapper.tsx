@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import { cn } from '~/utils/utils'
+import { cn } from '~/utils/Utils'
 
 type WrapperProps = {
   children: React.ReactNode
