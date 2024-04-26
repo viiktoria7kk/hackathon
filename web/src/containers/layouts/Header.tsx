@@ -8,19 +8,10 @@ import { Routes } from '~/constants/routes'
 
 import { cn } from '~/utils'
 
-type HeaderProps = {
-  className?: string
-}
-
-const Header: FC<HeaderProps> = ({ className }) => {
+const Header: FC = () => {
   return (
-    <div className='bg-white sticky z-50 top-0 inset-x-0 h-16 border-b border-gray-200'>
-      <header
-        className={cn(
-          'flex items-center h-full justify-center mx-auto max-w-screen-xl px-2.5 md:px-20 ',
-          className
-        )}
-      >
+    <header className='bg-white sticky z-50 top-0 inset-x-0 h-16 border-b border-gray-200'>
+      <div className='flex items-center h-full justify-center mx-auto max-w-screen-xl px-2.5'>
         <Wrapper>
           <div className='flex items-center justify-between h-full'>
             <div>App</div>
@@ -38,8 +29,8 @@ const Header: FC<HeaderProps> = ({ className }) => {
             </div>
           </div>
         </Wrapper>
-      </header>
-    </div>
+      </div>
+    </header>
   )
 }
 

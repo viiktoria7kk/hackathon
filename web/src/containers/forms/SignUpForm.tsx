@@ -33,7 +33,7 @@ const SignUpForm: FC = () => {
   }
 
   return (
-    <div className='max-w-[450px] py-7 px-8 border rounded-md'>
+    <div className='max-w-[450px] py-7 px-8 border rounded-md bg-white'>
       <div className='flex flex-col gap-3'>
         <div className='flex flex-col items-center space-y-2 text-center'>
           <h1 className='text-xl font-bold'>
