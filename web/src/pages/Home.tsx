@@ -1,13 +1,14 @@
-import { Button } from '~/components/Button'
-import { toast } from 'sonner'
+import { Link } from 'react-router-dom'
+import { buttonVariants } from '~/components/Button'
+import { cn } from '~/utils'
 
 const Home = () => {
   return (
     <div>
       <h1>Home</h1>
-      <Button onClick={() => toast.success('Ти на головній сторінці')}>
-        Тест
-      </Button>
+      <Link className={cn(buttonVariants())} to={'/requests'}>
+        Requests
+      </Link>
     </div>
   )
 }

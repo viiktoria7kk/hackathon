@@ -3,21 +3,10 @@ import { Link } from 'react-router-dom'
 
 import Wrapper from '~/containers/layouts/Wrapper'
 
-import { cn } from '~/utils'
-
-type FooterProps = {
-  className?: string
-}
-
-const Footer: FC<FooterProps> = ({ className }) => {
+const Footer: FC = () => {
   return (
-    <div className='bg-white h-16 border-t border-gray-200'>
-      <footer
-        className={cn(
-          'flex items-center h-full justify-center mx-auto max-w-screen-xl px-2.5 md:px-20 ',
-          className
-        )}
-      >
+    <footer className='bg-white h-16 border-t border-gray-200'>
+      <div className='flex items-center h-full justify-center mx-auto max-w-screen-xl px-2.5 '>
         <Wrapper>
           <div className='flex items-center justify-between h-full'>
             <div>© 2024 App</div>
@@ -45,8 +34,8 @@ const Footer: FC<FooterProps> = ({ className }) => {
             </div>
           </div>
         </Wrapper>
-      </footer>
-    </div>
+      </div>
+    </footer>
   )
 }
 
