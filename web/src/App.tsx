@@ -1,16 +1,11 @@
 import { Outlet } from 'react-router-dom'
-import Wrapper from '~/containers/layouts/Wrapper'
-import Header from '~/containers/layouts/Header'
-import Footer from '~/containers/layouts/Footer'
+import { Toaster } from 'sonner'
 
 const App = () => {
   return (
     <>
-      <Header />
-      <Wrapper className='relative flex flex-col min-h-screen -full'>
-        <Outlet />
-      </Wrapper>
-      <Footer />
+      <Outlet />
+      <Toaster position='top-right' />
     </>
   )
 }
