@@ -25,7 +25,7 @@ ALTER TABLE "posts" DROP CONSTRAINT "posts_user_id_fkey";
 -- AlterTable
 ALTER TABLE "posts" DROP COLUMN "timestamp",
 DROP COLUMN "user_id",
-ADD COLUMN     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ADD COLUMN     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 ADD COLUMN     "userId" TEXT NOT NULL;
 
 -- AlterTable
