@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core'
 import { ValidationPipe } from '@nestjs/common'
 
-import { AppModule } from '@modules/app.module'
+import { AppModule } from '@core/app.module'
 import { env } from '@configs/env.config'
 
 async function main() {
