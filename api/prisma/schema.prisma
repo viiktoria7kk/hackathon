@@ -16,7 +16,7 @@ datasource db {
 
 enum Roles {
   USER
-  VOLONTEER
+  VOLUNTEER
 }
 
 enum Categories {
@@ -32,12 +32,12 @@ model User {
   id String @id @default(uuid())
   firstName String
   lastName String
-  email String
   password String
-  phone String
-  bio String
+  email String
+  phone String?
+  bio String?
   role       Roles    @default(USER)
-  avatar String
+  avatar String?
   posts Post[]
 
   @@map("users")
@@ -50,9 +50,9 @@ model Post {
   content String
   category Categories
   isActivated Boolean
-  user_id String
   createdAt DateTime @default(now()) @map("created_at")
-  user User @relation(fields: [user_id], references: [id])
+  userId String
+  user User @relation(fields: [userId], references: [id])
 
   @@map("posts")
 }
