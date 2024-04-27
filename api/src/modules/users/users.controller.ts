@@ -26,6 +26,16 @@ export class UsersController {
   async getUserById(@Param('id') id: string): Promise<User | null> {
     return await this.usersService.getUserById(id)
   }
+  
+  @Get('email/:email')
+  async getUserByEmail(@Param('email') email: string): Promise<User | null> {
+    return await this.usersService.getUserByEmail(email)
+  }
+
+  @Post('file')
+  async saveFile() {
+    return this.usersService.saveFile()
+  }
 
   @Post()
   async createUser(@Body() data: User): Promise<User> {
@@ -45,8 +55,4 @@ export class UsersController {
     return await this.usersService.deleteUser({ id })
   }
 
-  @Get('email/:email')
-  async getUserByEmail(@Param('email') email: string): Promise<User | null> {
-    return await this.usersService.getUserByEmail(email)
-  }
 }

@@ -1,10 +1,16 @@
 import { PrismaService } from '@core/prisma/prisma.service'
-import { Injectable, NotFoundException } from '@nestjs/common'
+import { SUPABASE_STORAGE, FileService } from '@seishinverse/storage-manager'
+import { Inject, Injectable, NotFoundException } from '@nestjs/common'
 import { User } from '@prisma/client'
 
 @Injectable()
 export class UsersService {
-  constructor(private prismaService: PrismaService) {}
+  constructor(
+    private prismaService: PrismaService,
+
+    @Inject(SUPABASE_STORAGE)
+    private readonly fileService: FileService
+  ) {}
 
   async getAllUsers(): Promise<User[]> {
     return await this.prismaService.user.findMany()
@@ -21,6 +27,8 @@ export class UsersService {
   async createUser(data: User): Promise<User> {
     return await this.prismaService.user.create({ data })
   }
+
+  async saveFile() {}
 
   async updateUser(params: {
     where: { id: string }
