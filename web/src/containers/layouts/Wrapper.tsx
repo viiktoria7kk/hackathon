@@ -7,7 +7,7 @@ const wrapperVariants = cva('mx-auto w-full max-w-screen-xl ', {
   variants: {
     variant: {
       default: 'px-2.5',
-      app: 'relative flex flex-col flex-1 flex-grow',
+      app: 'relative flex items-center justify-center flex-col flex-1 flex-grow',
       page: 'flex flex-col gap-10 py-6',
       auth: 'relative flex flex-col items-center justify-center min-h-screen',
       spacing: 'md:px-20'

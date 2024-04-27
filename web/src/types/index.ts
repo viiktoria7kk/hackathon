@@ -1,4 +1,4 @@
-import { Categories } from '~/containers/Home/constants'
+import { Categories } from '~/containers/home/constants'
 
 export type RequestType = {
   id: string
