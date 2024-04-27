@@ -10,9 +10,10 @@ import { ArrowRight, Loader2 } from 'lucide-react'
 
 import { cn } from '~/utils'
 import {
-  AuthCredentialsValiador,
-  TAuthCredentialsValiador
+  AuthSignInCredentialsValiador,
+  TAuthSignInCredentialsValiador
 } from '~/utils/validators/AccountCredentials'
+import { Routes } from '~/constants/routes'
 
 const SignInForm: FC = () => {
   const [searchParams] = useSearchParams()
@@ -21,15 +22,20 @@ const SignInForm: FC = () => {
 
   const {
     register,
-    handleSubmit,
+    handleSubmit, // Виправлений рядок
     formState: { errors }
-  } = useForm<TAuthCredentialsValiador>({
-    resolver: zodResolver(AuthCredentialsValiador)
+  } = useForm<TAuthSignInCredentialsValiador>({
+    resolver: zodResolver(AuthSignInCredentialsValiador)
   })
+
   const isLoading = false
 
-  const onSubmit = ({ email, password }: TAuthCredentialsValiador) => {
-    console.log(email, password)
+  const onSubmit = ({ email, password }: TAuthSignInCredentialsValiador) => {
+    try {
+      console.log(email, password)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
@@ -40,7 +46,7 @@ const SignInForm: FC = () => {
             Увійти як {isVolonteer ? 'волонтер' : 'користувач'}
           </h1>
         </div>
-        <form onSubmit={void handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className='grid gap-2'>
             <div className='grid gap-1 py-2'>
               <Label htmlFor='email'>Пошта</Label>
@@ -104,7 +110,7 @@ const SignInForm: FC = () => {
             className={cn(
               buttonVariants({ variant: 'link', className: 'gap-1.5' })
             )}
-            to='/sign-up'
+            to={Routes.SIGN_UP}
           >
             Досі немаєте акаунту? Зареєструватися
             <ArrowRight className='h-4 w-4' />
