@@ -1,5 +1,5 @@
 import BannerCard from '~/components/BannerCard'
-import { banners } from '~/containers/home/constants'
+import { banners } from '~/containers/Home/constants'
 
 const Banner = () => {
   const bannerCards = banners.map((bannerCard) => (
