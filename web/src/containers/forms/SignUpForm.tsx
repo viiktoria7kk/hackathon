@@ -8,7 +8,7 @@ import { Input } from '~/components/Input'
 import { Label } from '~/components/Label'
 import { ArrowRight, EyeIcon, EyeOffIcon, Loader2 } from 'lucide-react'
 
-import { cn } from '~/utils'
+import { cn, createUrlPath } from '~/utils'
 import {
   AuthSignUpCredentialsValiador,
   TAuthSignUpCredentialsValiador
@@ -20,7 +20,7 @@ const SignUpForm: FC = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false)
 
-  const isVolonteer = searchParams.get('as') === 'volonteer'
+  const isVolunteer = searchParams.get('as') === 'volunteer'
 
   const toggleShowPassword = () => {
     setShowPassword((prevState) => !prevState)
@@ -54,10 +54,10 @@ const SignUpForm: FC = () => {
       <div className='flex flex-col gap-3'>
         <div className='flex flex-col items-center space-y-2 text-center'>
           <h1 className='text-xl font-bold'>
-            Зареєструватися як {isVolonteer ? 'волонтер' : 'користувач'}
+            Зареєструватись як {isVolunteer ? 'волонтер' : 'користувач'}
           </h1>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={void handleSubmit(onSubmit)}>
           <div className='grid gap-2'>
             <div className='grid gap-1 py-2 grid-cols-2'>
               <div>
@@ -168,6 +168,27 @@ const SignUpForm: FC = () => {
             </Button>
           </div>
         </form>
+        <div className='relative'>
+          <div
+            aria-hidden='true'
+            className='absolute inset-0 flex items-center'
+          >
+            <span className='w-full border-t'></span>
+          </div>
+          <div className='relative flex justify-center text-xs'>
+            <span className='bg-background px-2 text-muted-foreground'>
+              Чи продовжити
+            </span>
+          </div>
+        </div>
+        <Link
+          className={cn(buttonVariants({ variant: 'secondary' }))}
+          to={createUrlPath(Routes.SIGN_UP, '', {
+            as: isVolunteer ? 'user' : 'volunteer'
+          })}
+        >
+          Зареєструватись як {isVolunteer ? 'користувач' : 'волонтер'}
+        </Link>
         <div className='flex flex-col items-center space-y-2 text-center'>
           <Link
             className={cn(

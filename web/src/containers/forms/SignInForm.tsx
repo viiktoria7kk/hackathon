@@ -8,7 +8,7 @@ import { Input } from '~/components/Input'
 import { Label } from '~/components/Label'
 import { ArrowRight, Loader2 } from 'lucide-react'
 
-import { cn } from '~/utils'
+import { cn, createUrlPath } from '~/utils'
 import {
   AuthSignInCredentialsValiador,
   TAuthSignInCredentialsValiador
@@ -18,7 +18,7 @@ import { Routes } from '~/constants/routes'
 const SignInForm: FC = () => {
   const [searchParams] = useSearchParams()
 
-  const isVolonteer = searchParams.get('as') === 'volonteer'
+  const isVolunteer = searchParams.get('as') === 'volunteer'
 
   const {
     register,
@@ -39,10 +39,10 @@ const SignInForm: FC = () => {
       <div className='flex flex-col gap-3'>
         <div className='flex flex-col items-center space-y-2 text-center'>
           <h1 className='text-xl font-bold'>
-            Увійти як {isVolonteer ? 'волонтер' : 'користувач'}
+            Увійти як {isVolunteer ? 'волонтер' : 'користувач'}
           </h1>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={void handleSubmit(onSubmit)}>
           <div className='grid gap-2'>
             <div className='grid gap-1 py-2'>
               <Label htmlFor='email'>Пошта</Label>
@@ -92,15 +92,14 @@ const SignInForm: FC = () => {
             </span>
           </div>
         </div>
-        {isVolonteer ? (
-          <Button disabled={isLoading} variant='secondary'>
-            Увійти як користувач
-          </Button>
-        ) : (
-          <Button disabled={isLoading} variant='secondary'>
-            Продовжити як волонтер
-          </Button>
-        )}
+        <Link
+          className={cn(buttonVariants({ variant: 'secondary' }))}
+          to={createUrlPath(Routes.SIGN_IN, '', {
+            as: isVolunteer ? 'user' : 'volunteer'
+          })}
+        >
+          Продовжити як {isVolunteer ? 'користувач' : 'волонтер'}
+        </Link>
         <div className='flex flex-col items-center space-y-2 text-center'>
           <Link
             className={cn(
