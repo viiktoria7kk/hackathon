@@ -1,4 +1,5 @@
 import { NestFactory } from '@nestjs/core'
+import { ValidationPipe } from '@nestjs/common'
 
 import { AppModule } from '@core/app.module'
 import { env } from '@configs/env.config'
@@ -13,8 +14,10 @@ async function main() {
     methods: ['POST', 'GET', 'DELETE', 'PATCH', 'PUT', 'OPTIONS']
   })
 
+  app.useGlobalPipes(new ValidationPipe())
+
   await app.listen(port, () =>
-    console.log('🪼 Server started on http://localhost:' + port)
+    console.log('Server started on http://localhost:' + port)
   )
 }
 
