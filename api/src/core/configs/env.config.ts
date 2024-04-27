@@ -14,7 +14,14 @@ const schema = zod.object({
   APPWRITE_PROJECT_ID: zod.string(),
   APPWRITE_ENDPOINT: zod.string(),
   APPWRITE_API_KEY: zod.string(),
-  APPWRITE_BUCKET_NAME: zod.string()
+  APPWRITE_BUCKET_NAME: zod.string(),
+
+  // Mail
+  MAIL_USER: zod.string(),
+  MAIL_PASS: zod.string(),
+  MAIL_CLIENT_ID: zod.string(),
+  MAIL_CLIENT_SECRET: zod.string(),
+  MAIL_REFRESH_TOKEN: zod.string()
 })
 
 export const env = parseEnvs(schema)
