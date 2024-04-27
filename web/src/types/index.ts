@@ -1,4 +1,6 @@
-export type RequestT = {
+import { Categories } from '~/containers/home/constants'
+
+export type RequestType = {
   id: string
   title: string
   description: string
@@ -8,4 +10,18 @@ export type RequestT = {
   isActive: boolean
   user_id: number
   createdBy: string
+}
+
+export type CategoryType = {
+  title: string
+  category: Categories
+  image: string
+}
+
+export type BannerItemType = {
+  title: string
+  description: string
+  image: string
+  path: string
+  isUser: boolean
 }

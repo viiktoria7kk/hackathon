@@ -4,13 +4,13 @@ import { User2Icon } from 'lucide-react'
 import { Button, buttonVariants } from '~/components/Button'
 import { Badge } from '~/components/Badge'
 
-import type { RequestT } from '~/types'
+import type { RequestType } from '~/types'
 
 import { cn, createUrlPath, normalizeDate } from '~/utils'
 import { Routes } from '~/constants/routes'
 
 type RequestCardProps = {
-  request: RequestT
+  request: RequestType
 }
 const RequestCard = ({ request }: RequestCardProps) => {
   const { id, title, description, category, createdBy, createdAt } = request

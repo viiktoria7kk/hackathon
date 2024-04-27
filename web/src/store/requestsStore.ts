@@ -1,19 +1,19 @@
 import { create } from 'zustand'
 import { requests } from '~/constants/requests'
-import type { RequestT } from '~/types'
+import type { RequestType } from '~/types'
 
 type RequestsStore = {
-  requests: RequestT[]
-  createRequest: (request: RequestT) => void
-  updateRequest: (request: RequestT) => void
-  deleteRequest: (request: RequestT) => void
-  loading: boolean
+  requests: RequestType[]
+  createRequest: (request: RequestType) => void
+  updateRequest: (request: RequestType) => void
+  deleteRequest: (request: RequestType) => void
+  isLoading: boolean
   error: string | null
 }
 
 export const useRequestsStore = create<RequestsStore>((set) => ({
   requests,
-  loading: false,
+  isLoading: true,
   error: null,
   deleteRequest: (request) =>
     set((state) => ({
