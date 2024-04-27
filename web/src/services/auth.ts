@@ -1,26 +1,27 @@
-import ky from 'ky'
-import { SignInData, SignUpData } from '~/types'
+import { api } from '~/configs/ky'
 
-export const AuthServices = () => {
-  const signIn = async (data: SignInData) => {
-    const response = await ky
-      .post(`${process.env.VITE_SERVER_URL}/auth/sign-in`, {
-        json: JSON.stringify(data)
+import { Routes } from '~/constants/routes'
+import {
+  SignInParams,
+  SignInResponse,
+  SignUpParams,
+  SignUpResponse
+} from '~/types'
+import { createUrlPath } from '~/utils'
+
+export const AuthService = {
+  signIn: (data: SignInParams): Promise<SignInResponse> => {
+    return api
+      .post(createUrlPath(Routes.SIGN_IN), {
+        json: data
       })
       .json()
-
-    return response
-  }
-
-  const signUp = async (data: SignUpData) => {
-    const response = await ky
-      .post(`${process.env.VITE_SERVER_URL}/auth/sign-up`, {
-        json: JSON.stringify(data)
+  },
+  signUp: (data: SignUpParams): Promise<SignUpResponse> => {
+    return api
+      .post(createUrlPath(Routes.SIGN_UP), {
+        json: data
       })
       .json()
-
-    return response
   }
-
-  return { signIn, signUp }
 }

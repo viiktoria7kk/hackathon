@@ -27,17 +27,25 @@ export type BannerItemType = {
   isUser: boolean
 }
 
-export type SignInData = {
+export type SignInParams = {
   email: string
   password: string
   role: Role.USER | Role.VOLUNTEER
 }
 
-export type SignUpData = {
+export type SignInResponse = {
+  message: string
+}
+
+export type SignUpParams = {
   lastName: string
   firstName: string
   email: string
   password: string
   confirmPassword: string
   role: Role.USER | Role.VOLUNTEER
+}
+
+export type SignUpResponse = {
+  accessToken: string
 }
