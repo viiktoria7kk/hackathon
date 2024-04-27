@@ -1,14 +1,15 @@
-import Banner from '~/containers/Home/Banner'
-import Categories from '~/containers/Home/Categories'
-import FAQContainer from '~/containers/Home/FAQ'
+import Banner from '~/containers/home/Banner'
+import Categories from '~/containers/home/Categories'
+import FAQContainer from '~/containers/home/FAQ'
+import Wrapper from '~/containers/layouts/Wrapper'
 
 const Home = () => {
   return (
-    <div className='flex flex-col gap-y-10'>
+    <Wrapper variant='page'>
       <Categories />
       <Banner />
       <FAQContainer />
-    </div>
+    </Wrapper>
   )
 }
 

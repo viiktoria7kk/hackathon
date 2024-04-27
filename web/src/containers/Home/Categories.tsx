@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { categories } from '~/containers/Home/constants'
+import { categories } from '~/containers/home/constants'
 import CategoryItem from '~/components/CategoryItem'
 
 const Categories: FC = () => {

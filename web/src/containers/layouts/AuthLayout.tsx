@@ -1,12 +1,15 @@
-import { FC } from 'react'
+import { FC, Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
 
 import Wrapper from '~/containers/layouts/Wrapper'
+import Loader from '~/components/Loader'
 
 const AuthLayout: FC = () => {
   return (
-    <Wrapper className='relative flex flex-col items-center justify-center min-h-screen'>
-      <Outlet />
+    <Wrapper variant='auth'>
+      <Suspense fallback={<Loader variant='default' />}>
+        <Outlet />
+      </Suspense>
     </Wrapper>
   )
 }
