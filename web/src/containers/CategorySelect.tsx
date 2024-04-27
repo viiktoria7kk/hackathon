@@ -16,6 +16,12 @@ const CategorySelect: FC = () => {
 
   const { setCategory } = useFiltersStore()
 
+  const selectItems = categories.map((category) => (
+    <SelectItem key={category} value={category}>
+      {category}
+    </SelectItem>
+  ))
+
   return (
     <Select onValueChange={setCategory}>
       <SelectTrigger className='max-w-[250px] text-lg focus-visible:ring-1 focus-visible:ring-offset-1 '>
@@ -24,11 +30,7 @@ const CategorySelect: FC = () => {
       <SelectContent>
         <SelectGroup>
           <SelectLabel>Категорії</SelectLabel>
-          {categories.map((category) => (
-            <SelectItem key={category} value={category}>
-              {category}
-            </SelectItem>
-          ))}
+          {selectItems}
         </SelectGroup>
       </SelectContent>
     </Select>
