@@ -26,7 +26,7 @@ const CategorySelect: FC = () => {
           <SelectLabel>Категорії</SelectLabel>
           {categories.map((category) => (
             <SelectItem key={category} value={category}>
-              {category.charAt(0).toUpperCase() + category.slice(1)}
+              {category}
             </SelectItem>
           ))}
         </SelectGroup>
