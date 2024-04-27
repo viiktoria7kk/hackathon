@@ -13,7 +13,7 @@ type RequestsStore = {
 
 export const useRequestsStore = create<RequestsStore>((set) => ({
   requests,
-  isLoading: true,
+  isLoading: false,
   error: null,
   deleteRequest: (request) =>
     set((state) => ({

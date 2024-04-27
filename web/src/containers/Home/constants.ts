@@ -30,13 +30,13 @@ export const banners = [
   }
 ]
 
-export enum Categories {
-  PSYCHOLOGICAL_SUPPORT,
-  HUMANITARIAN_AID,
-  LEGAL_ASSISTANCE,
-  HOTLINE_SERVICES,
-  MEDICAL_HELP,
-  INITIATIVES_AND_PROGRAMS
+export const Categories = {
+  PSYCHOLOGICAL_SUPPORT: 'Психологічна допомога',
+  HUMANITARIAN_AID: 'Гуманітарна допомога',
+  LEGAL_ASSISTANCE: 'Правова допомога',
+  HOTLINE_SERVICES: 'Гарячі лінії',
+  MEDICAL_HELP: 'Медична допопмога',
+  INITIATIVES_AND_PROGRAMS: 'Ініціативи та програми'
 }
 
 export const categories: CategoryType[] = [

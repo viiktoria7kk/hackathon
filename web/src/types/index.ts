@@ -14,7 +14,7 @@ export type RequestType = {
 
 export type CategoryType = {
   title: string
-  category: Categories
+  category: (typeof Categories)[keyof typeof Categories]
   image: string
 }
 
