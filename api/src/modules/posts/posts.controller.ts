@@ -1,6 +1,16 @@
-import { PostsService } from 'src/services/posts.service'
+import { PostsService } from './posts.service'
 import { Posts, Categories } from '@prisma/client'
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  UseGuards
+} from '@nestjs/common'
+import { AuthGuard } from '@core/guards/auth.guard'
 
 @Controller('posts')
 export class PostsController {
@@ -16,6 +26,7 @@ export class PostsController {
     return await this.postsService.getPostById(id)
   }
 
+  @UseGuards(AuthGuard)
   @Post()
   async createPost(@Body() data: Posts): Promise<Posts> {
     return await this.postsService.createPost(data)

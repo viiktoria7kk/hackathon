@@ -7,13 +7,32 @@ export class PostsService {
   constructor(private prisma: PrismaService) {}
 
   async getAllPosts(): Promise<Posts[]> {
-    return await this.prisma.posts.findMany()
+    return await this.prisma.posts.findMany({
+      include: {
+        user: {
+          select: {
+            firstName: true,
+            lastName: true,
+            avatar: true
+          }
+        }
+      }
+    })
   }
 
   async getPostById(id: string): Promise<Posts | null> {
     try {
       return await this.prisma.posts.findUnique({
-        where: { id }
+        where: { id },
+        include: {
+          user: {
+            select: {
+              firstName: true,
+              lastName: true,
+              avatar: true
+            }
+          }
+        }
       })
     } catch (error) {
       throw new Error(`Post with id ${id} not found`)
@@ -60,9 +79,9 @@ export class PostsService {
     })
   }
 
-  async getPostsByAuthor(user_id: string): Promise<Posts[]> {
+  async getPostsByAuthor(userId: string): Promise<Posts[]> {
     return await this.prisma.posts.findMany({
-      where: { user_id }
+      where: { userId }
     })
   }
 }

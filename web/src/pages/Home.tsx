@@ -1,13 +1,13 @@
-import { Button } from '~/components/Button'
-import { toast } from 'sonner'
+import Banner from '~/containers/Home/Banner'
+import Categories from '~/containers/Home/Categories'
+import FAQContainer from '~/containers/Home/FAQ'
 
 const Home = () => {
   return (
-    <div>
-      <h1>Home</h1>
-      <Button onClick={() => toast.success('Ти на головній сторінці')}>
-        Тест
-      </Button>
+    <div className='flex flex-col gap-y-10'>
+      <Categories />
+      <Banner />
+      <FAQContainer />
     </div>
   )
 }
