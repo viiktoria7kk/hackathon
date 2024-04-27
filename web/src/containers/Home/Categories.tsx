@@ -1,6 +1,6 @@
 import { FC } from 'react'
-import { categories } from '~/containers/Home/constants'
-import CategoryItem from '~/containers/Home/categories/CategoryItem'
+import { categories } from '~/containers/home/constants'
+import CategoryItem from '~/components/CategoryItem'
 
 const Categories: FC = () => {
   const categoriesList = categories.map((categoryItem, i) => (
