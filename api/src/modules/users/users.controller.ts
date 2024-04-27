@@ -6,11 +6,16 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
-  UseGuards
+  UploadedFile,
+  UseGuards,
+  UseInterceptors
 } from '@nestjs/common'
 import { AuthGuard } from '@core/guards/auth.guard'
+import { FileInterceptor } from '@nestjs/platform-express'
+import { IFile } from '@seishinverse/storage-manager'
 
 @UseGuards(AuthGuard)
 @Controller('users')
@@ -26,15 +31,20 @@ export class UsersController {
   async getUserById(@Param('id') id: string): Promise<User | null> {
     return await this.usersService.getUserById(id)
   }
-  
+
   @Get('email/:email')
   async getUserByEmail(@Param('email') email: string): Promise<User | null> {
     return await this.usersService.getUserByEmail(email)
   }
 
-  @Post('file')
-  async saveFile() {
-    return this.usersService.saveFile()
+  @Patch(':id/avatar')
+  @UseInterceptors(
+    FileInterceptor('avatar', {
+      limits: { fileSize: 15 * 1024 * 1024, files: 1 }
+    })
+  )
+  async saveFile(@Param('id') id: string, @UploadedFile() file: IFile) {
+    return this.usersService.updateUserAvatarById(id, file)
   }
 
   @Post()
@@ -54,5 +64,4 @@ export class UsersController {
   async deleteUser(@Param('id') id: string): Promise<User> {
     return await this.usersService.deleteUser({ id })
   }
-
 }

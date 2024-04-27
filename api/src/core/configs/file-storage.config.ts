@@ -1,5 +1,7 @@
 import { env } from '@core/configs/env.config'
-export const supabaseConfig = {
-  apiKey: env.SUPABASE_API_KEY,
-  projectUrl: env.SUPABASE_ENDPOINT
+
+export const appWriteConfig = {
+  projectId: env.APPWRITE_PROJECT_ID,
+  endpoint: env.APPWRITE_ENDPOINT,
+  apiKey: env.APPWRITE_API_KEY
 }

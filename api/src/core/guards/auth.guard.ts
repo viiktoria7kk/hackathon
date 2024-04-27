@@ -25,7 +25,7 @@ export class AuthGuard implements CanActivate {
 
     if (isPublic) return true
 
-    const authHeader = request.headers['Authorization']
+    const authHeader = request.headers['authorization']
 
     if (!authHeader) throw new BadRequestException('Ви не авторизовані')
 

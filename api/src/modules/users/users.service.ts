@@ -1,6 +1,15 @@
 import { PrismaService } from '@core/prisma/prisma.service'
-import { SUPABASE_STORAGE, FileService } from '@seishinverse/storage-manager'
-import { Inject, Injectable, NotFoundException } from '@nestjs/common'
+import {
+  APPWRITE_STORAGE,
+  IFile,
+  FileService
+} from '@seishinverse/storage-manager'
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+  NotFoundException
+} from '@nestjs/common'
 import { User } from '@prisma/client'
 
 @Injectable()
@@ -8,7 +17,7 @@ export class UsersService {
   constructor(
     private prismaService: PrismaService,
 
-    @Inject(SUPABASE_STORAGE)
+    @Inject(APPWRITE_STORAGE)
     private readonly fileService: FileService
   ) {}
 
@@ -28,7 +37,24 @@ export class UsersService {
     return await this.prismaService.user.create({ data })
   }
 
-  async saveFile() {}
+  async updateUserAvatarById(id: string, file: IFile) {
+    const response = await this.fileService.upload(file)
+
+    if (
+      response.success &&
+      'url' in response &&
+      typeof response.url === 'string'
+    ) {
+      await this.prismaService.user.update({
+        where: { id },
+        data: { avatar: response.url }
+      })
+
+      return
+    }
+
+    throw new BadRequestException(response.error?.message)
+  }
 
   async updateUser(params: {
     where: { id: string }
