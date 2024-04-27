@@ -50,7 +50,7 @@ export class AuthService {
     })
 
     return {
-      message: "Вітаємо вас з успішною реєстрацією!"
+      message: 'Вітаємо вас з успішною реєстрацією!'
     }
   }
 

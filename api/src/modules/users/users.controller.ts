@@ -6,13 +6,11 @@ import {
   Delete,
   Get,
   Param,
-  Post,
   Put,
   UseGuards
 } from '@nestjs/common'
 import { AuthGuard } from '@core/guards/auth.guard'
 
-@UseGuards(AuthGuard)
 @Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) {}
@@ -27,11 +25,7 @@ export class UsersController {
     return await this.usersService.getUserById(id)
   }
 
-  @Post()
-  async createUser(@Body() data: User): Promise<User> {
-    return await this.usersService.createUser(data)
-  }
-
+  @UseGuards(AuthGuard)
   @Put('/:id')
   async updateUser(
     @Param('id') id: string,
@@ -40,6 +34,7 @@ export class UsersController {
     return await this.usersService.updateUser({ where: { id }, data })
   }
 
+  @UseGuards(AuthGuard)
   @Delete(':id')
   async deleteUser(@Param('id') id: string): Promise<User> {
     return await this.usersService.deleteUser({ id })

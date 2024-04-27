@@ -38,12 +38,12 @@ model User {
   bio String?
   role       Roles    @default(USER)
   avatar String?
-  posts Post[]
-
+  posts Posts[]
+  
   @@map("users")
 }
 
-model Post {
+model Posts {
   id String @id @default(uuid())
   title String
   description String
