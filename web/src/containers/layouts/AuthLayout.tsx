@@ -7,7 +7,7 @@ import Loader from '~/components/Loader'
 const AuthLayout: FC = () => {
   return (
     <Wrapper variant='auth'>
-      <Suspense fallback={<Loader variant='default' />}>
+      <Suspense fallback={<Loader variant='pageLoader' />}>
         <Outlet />
       </Suspense>
     </Wrapper>

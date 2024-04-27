@@ -11,7 +11,7 @@ const AppLayout: FC = () => {
     <>
       <Header />
       <Wrapper variant='app'>
-        <Suspense fallback={<Loader variant='default' />}>
+        <Suspense fallback={<Loader variant='pageLoader' />}>
           <Outlet />
         </Suspense>
       </Wrapper>
