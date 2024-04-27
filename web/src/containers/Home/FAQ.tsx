@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger
 } from '~/components/Accordion'
-import { FAQList } from '~/containers/home/constants'
+import { FAQList } from '~/containers/Home/constants'
 
 const FAQContainer = () => {
   const FAQItems = FAQList.map(({ title, description }, i) => (

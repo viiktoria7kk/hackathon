@@ -1,6 +1,6 @@
-import Banner from '~/containers/home/Banner'
-import Categories from '~/containers/home/Categories'
-import FAQContainer from '~/containers/home/FAQ'
+import Banner from '~/containers/Home/Banner'
+import Categories from '~/containers/Home/Categories'
+import FAQContainer from '~/containers/Home/FAQ'
 
 const Home = () => {
   return (

@@ -1,4 +1,4 @@
-import { Categories } from '~/constants/enums'
+import { Categories } from '~/containers/Home/constants'
 
 export type RequestType = {
   id: string
