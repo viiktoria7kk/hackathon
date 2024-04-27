@@ -1,3 +1,4 @@
+import { Role } from '~/constants/enums'
 import { Categories } from '~/containers/home/constants'
 
 export type RequestType = {
@@ -24,4 +25,27 @@ export type BannerItemType = {
   image: string
   path: string
   isUser: boolean
+}
+
+export type SignInParams = {
+  email: string
+  password: string
+  role: Role.USER | Role.VOLUNTEER
+}
+
+export type SignInResponse = {
+  message: string
+}
+
+export type SignUpParams = {
+  lastName: string
+  firstName: string
+  email: string
+  password: string
+  confirmPassword: string
+  role: Role.USER | Role.VOLUNTEER
+}
+
+export type SignUpResponse = {
+  accessToken: string
 }
