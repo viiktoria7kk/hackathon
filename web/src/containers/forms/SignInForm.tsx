@@ -22,7 +22,7 @@ const SignInForm: FC = () => {
 
   const {
     register,
-    handleSubmit, // Виправлений рядок
+    handleSubmit,
     formState: { errors }
   } = useForm<TAuthSignInCredentialsValiador>({
     resolver: zodResolver(AuthSignInCredentialsValiador)
@@ -31,11 +31,7 @@ const SignInForm: FC = () => {
   const isLoading = false
 
   const onSubmit = ({ email, password }: TAuthSignInCredentialsValiador) => {
-    try {
-      console.log(email, password)
-    } catch (error) {
-      console.error(error)
-    }
+    console.log(email, password)
   }
 
   return (

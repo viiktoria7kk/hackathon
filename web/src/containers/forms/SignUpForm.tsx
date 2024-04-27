@@ -168,28 +168,6 @@ const SignUpForm: FC = () => {
             </Button>
           </div>
         </form>
-        <div className='relative'>
-          <div
-            aria-hidden='true'
-            className='absolute inset-0 flex items-center'
-          >
-            <span className='w-full border-t'></span>
-          </div>
-          <div className='relative flex justify-center text-xs'>
-            <span className='bg-background px-2 text-muted-foreground'>
-              Чи продовжити
-            </span>
-          </div>
-        </div>
-        {isVolonteer ? (
-          <Button disabled={isLoading} variant='secondary'>
-            Зареєструватись як користувач
-          </Button>
-        ) : (
-          <Button disabled={isLoading} variant='secondary'>
-            Продовжити як волонтер
-          </Button>
-        )}
         <div className='flex flex-col items-center space-y-2 text-center'>
           <Link
             className={cn(

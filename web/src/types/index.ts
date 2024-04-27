@@ -1,4 +1,5 @@
-import { Categories } from '~/containers/home/constants'
+import { Role } from '~/constants/enums'
+import { Categories } from '~/containers/Home/constants'
 
 export type RequestType = {
   id: string
@@ -24,4 +25,19 @@ export type BannerItemType = {
   image: string
   path: string
   isUser: boolean
+}
+
+export type SignInData = {
+  email: string
+  password: string
+  role: Role.USER | Role.VOLUNTEER
+}
+
+export type SignUpData = {
+  lastName: string
+  firstName: string
+  email: string
+  password: string
+  confirmPassword: string
+  role: Role.USER | Role.VOLUNTEER
 }
