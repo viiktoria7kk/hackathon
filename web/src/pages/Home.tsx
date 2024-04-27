@@ -1,14 +1,13 @@
-import { Link } from 'react-router-dom'
-import { buttonVariants } from '~/components/Button'
-import { cn } from '~/utils'
+import Banner from '~/containers/Home/banner/Banner'
+import Categories from '~/containers/Home/categories/Categories'
+import FAQContainer from '~/containers/Home/faq'
 
 const Home = () => {
   return (
-    <div>
-      <h1>Home</h1>
-      <Link className={cn(buttonVariants())} to={'/requests'}>
-        Requests
-      </Link>
+    <div className='flex flex-col gap-y-10'>
+      <Categories />
+      <Banner />
+      <FAQContainer />
     </div>
   )
 }
