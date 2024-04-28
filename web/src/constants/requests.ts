@@ -20,7 +20,11 @@ export const requests = [
     category: 'Правова допомога',
     isActive: true,
     user_id: 1,
-    createdBy: 'First User'
+    user: {
+      firstName: 'vikaaa',
+      lastName: 'z',
+      avatar: null
+    }
   },
 
   {
@@ -33,7 +37,11 @@ export const requests = [
     category: 'Правова допомога',
     isActive: true,
     user_id: 2,
-    createdBy: 'Second User'
+    user: {
+      firstName: 'vikaaa',
+      lastName: 'z',
+      avatar: null
+    }
   },
 
   {
@@ -46,7 +54,11 @@ export const requests = [
     category: 'Категорії',
     isActive: true,
     user_id: 3,
-    createdBy: 'Third User'
+    user: {
+      firstName: 'vikaaa',
+      lastName: 'z',
+      avatar: null
+    }
   }
 ]
 
@@ -61,6 +73,10 @@ for (let i = 4; i <= 15; i++) {
     category: 'Правова допомога',
     isActive: true,
     user_id: i,
-    createdBy: `${i}th User`
+    user: {
+      firstName: 'vikaaa',
+      lastName: 'z',
+      avatar: null
+    }
   })
 }
