@@ -46,9 +46,6 @@ const PaginationContainer: FC<PaginationContainerProps> = ({
           </PaginationItem>
         ))}
         <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
           <PaginationNext
             to={createUrlPath(Routes.REQUESTS, '', {
               page: nextPage

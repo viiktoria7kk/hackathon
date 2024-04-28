@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { requests } from '~/constants/requests'
 import { requestsService } from '~/services/requests'
 import type { RequestType } from '~/types'
 
@@ -15,7 +16,7 @@ type RequestsStore = {
 }
 
 export const useRequestsStore = create<RequestsStore>((set) => ({
-  requests: [],
+  requests,
   request: null,
   isLoading: false,
   error: null,
