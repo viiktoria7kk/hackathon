@@ -1,5 +1,23 @@
+import { ReactElement } from 'react'
+
 import { Role } from '~/constants/enums'
 import { Categories } from '~/containers/home/constants'
+
+export enum ProfileTabsEnum {
+  Profile = 'profile',
+  Posts = 'posts',
+  EditProfile = 'edit-profile'
+}
+
+export type ProfileTab = {
+  title: string
+  content: ReactElement
+  icon: ReactElement
+}
+
+export type ProfileTabsData = {
+  [key in ProfileTabsEnum]: ProfileTab
+}
 
 export type UserType = {
   id: string
@@ -13,6 +31,11 @@ export type UserType = {
   phone?: string
   requests: RequestType[]
 }
+
+export type UserFormType = Omit<
+  UserType,
+  'id' | 'password' | 'role' | 'requests'
+>
 
 export type RequestType = {
   id: string
