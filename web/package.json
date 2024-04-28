@@ -8,9 +8,7 @@
     "build": "vite build",
     "lint": "eslint src/**/*.{js,jsx,ts,tsx}",
     "lint-fix": "eslint src/**/*.{js,jsx,ts,tsx} --fix",
-    "preview": "vite preview",
-    "prepare": "husky install",
-    "pre-commit": "lint-staged"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",

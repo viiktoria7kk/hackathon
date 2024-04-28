@@ -5,8 +5,8 @@ import { Skeleton } from '~/components/Skeleton'
 import PaginationContainer from '~/containers/requests/Pagination'
 import { useSearchParams } from 'react-router-dom'
 import Search from '~/containers/requests/Searh'
-import { RequestType } from '~/types'
 import { useFiltersStore } from '~/store/filtersStore'
+import { useEffect } from 'react'
 
 const REQUESTS_PER_PAGE = 5
 
@@ -17,14 +17,7 @@ const Requests = () => {
 
   const currentPage = Number(searchParams.get('page')) || 1
 
-  const { requests, isLoading } = useRequestsStore()
-
-  const getRequestsForPage = (requests: RequestType[], page: number) => {
-    return requests.slice(
-      (page - 1) * REQUESTS_PER_PAGE,
-      page * REQUESTS_PER_PAGE
-    )
-  }
+  const { requests, isLoading, getRequests } = useRequestsStore()
 
   const createSkeletonList = (length: number) => {
     return Array.from({ length }, (_, index) => (
@@ -37,7 +30,10 @@ const Requests = () => {
       (category ? request.category === category : true)
   )
 
-  const visibleRequests = getRequestsForPage(filteredRequests, currentPage)
+  useEffect(() => {
+    void getRequests()
+  }, [])
+
   const totalPages = isLoading
     ? 1
     : Math.ceil(filteredRequests.length / REQUESTS_PER_PAGE)
@@ -46,8 +42,8 @@ const Requests = () => {
 
   const requestsList = isLoading ? (
     skeletonList
-  ) : visibleRequests.length > 0 ? (
-    visibleRequests.map((request) => (
+  ) : filteredRequests.length > 0 ? (
+    filteredRequests.map((request) => (
       <RequestCard key={request.id} request={request} />
     ))
   ) : (
