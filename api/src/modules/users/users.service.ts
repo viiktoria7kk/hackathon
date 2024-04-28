@@ -33,10 +33,6 @@ export class UsersService {
     }
   }
 
-  async createUser(data: User): Promise<User> {
-    return await this.prismaService.user.create({ data })
-  }
-
   async updateUserAvatarById(id: string, file: IFile) {
     const response = await this.fileService.upload(file)
 
@@ -78,13 +74,5 @@ export class UsersService {
       throw new NotFoundException(`User with id ${where.id} not found`)
     }
     return await this.prismaService.user.delete({ where })
-  }
-
-  async getUserByEmail(email: string): Promise<User | null> {
-    try {
-      return await this.prismaService.user.findFirst({ where: { email } })
-    } catch (error) {
-      throw error
-    }
   }
 }
