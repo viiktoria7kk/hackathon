@@ -17,7 +17,13 @@ const Header: FC = () => {
       <div className='flex items-center h-full justify-center mx-auto max-w-screen-xl px-2.5'>
         <Wrapper>
           <div className='flex items-center justify-between h-full'>
-            <div>App</div>
+            <Link to={Routes.HOME}>
+              <img
+                src='https://www.pngall.com/wp-content/uploads/5/Help-PNG.png'
+                alt='logo'
+                className='h-12 w-12 object-cover'
+              />
+            </Link>
             <div className='flex items-center gap-3'>
               {user ? (
                 <>

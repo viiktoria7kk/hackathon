@@ -13,7 +13,10 @@ type IntroProps = {
 const Intro: FC<IntroProps> = ({ children, isHome }) => {
   return (
     <div
-      className={cn('w-auto h-auto p-12', isHome ? 'bg-home' : 'bg-request')}
+      className={cn(
+        'w-auto h-auto p-12 bg-cover',
+        isHome ? 'bg-home' : 'bg-request'
+      )}
     >
       <div>{children}</div>
       <Link

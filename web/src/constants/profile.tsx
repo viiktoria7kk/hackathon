@@ -3,7 +3,12 @@ import { ProfileTabsEnum, ProfileTabsData } from '~/types'
 import ProfilEditForm from '~/containers/forms/ProfilEditForm'
 import UserInfo from '~/containers/profile/UserInfo'
 
-import { CircleUserRound, UserRoundCog, BookMarked } from 'lucide-react'
+import {
+  CircleUserRound,
+  UserRoundCog,
+  BookMarked,
+  MessageCircle
+} from 'lucide-react'
 import UserRequests from '~/containers/profile/UserRequests'
 
 export const tabsData: ProfileTabsData = {
@@ -21,5 +26,10 @@ export const tabsData: ProfileTabsData = {
     title: 'Edit Profile',
     content: <ProfilEditForm />,
     icon: <UserRoundCog />
+  },
+  [ProfileTabsEnum.Chats]: {
+    title: 'Chats',
+    content: <div>Chats</div>,
+    icon: <MessageCircle />
   }
 }

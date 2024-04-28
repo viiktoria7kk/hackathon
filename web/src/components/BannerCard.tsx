@@ -1,8 +1,7 @@
-import { Link } from 'react-router-dom'
 import { FC } from 'react'
 
 import { cn } from '~/utils'
-import { buttonVariants } from '~/components/Button'
+import { Button, buttonVariants } from '~/components/Button'
 import { BannerItemType } from '~/types'
 
 type BannerCardProps = {
@@ -18,14 +17,13 @@ const BannerCard: FC<BannerCardProps> = ({ bannerCard }) => {
         <h3 className='text-foreground text-xl mb-3 font-semibold'>{title}</h3>
         <p className='text-center text-lg font-normal'>{description}</p>
       </div>
-      <Link
+      <Button
         className={cn(buttonVariants({ size: 'lg' }), 'text-base', {
           'bg-red-600 hover:bg-red-600/90': !isUser
         })}
-        to={path}
       >
         Зареєструся як {isUser ? 'користувач' : 'волонтер'}
-      </Link>
+      </Button>
     </div>
   )
 }
