@@ -71,6 +71,12 @@ module.exports = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out'
       }
+    },
+    backgroundImage: {
+      home: 'url(./src/assets/images/home/bg.png)',
+      request: 'url(./src/assets/images/requests/bg.png)',
+      'intro-gradient':
+        'linear-gradient(to right, rgb(56, 189, 248), rgb(37, 99, 235))'
     }
   },
   plugins: [require('tailwindcss-animate')]
