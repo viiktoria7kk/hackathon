@@ -19,7 +19,7 @@ const Request = () => {
   const handlePingMessage = () => {
     toast.success('Повідомлення надіслано користувачу на пошту!')
   }
-  const request = requests.filter((request) => request.id === id)[0]
+  const request = requests?.filter((request) => request.id === id)[0]
 
   return (
     <Wrapper

@@ -2,7 +2,6 @@ import { useSearchParams } from 'react-router-dom'
 
 import RequestCard from '~/components/RequestCard'
 import Wrapper from '~/containers/layouts/Wrapper'
-import { useRequestsStore } from '~/store/requestsStore'
 import { Skeleton } from '~/components/Skeleton'
 import PaginationContainer from '~/containers/requests/Pagination'
 import Search from '~/containers/requests/Searh'
@@ -21,9 +20,13 @@ const Requests = () => {
 
   const isHome = window.location.pathname === '/'
 
-  const user = useUserStore((state) => state.user)
-  const { isLoading } = useRequestsStore()
-  const requests = user?.requests!
+  const { isLoading, user } = useUserStore()
+
+  if (!user || isLoading) {
+    return null
+  }
+
+  const requests = user.requests
 
   const createSkeletonList = (length: number) => {
     return Array.from({ length }, (_, index) => (
@@ -44,17 +47,18 @@ const Requests = () => {
 
   const skeletonList = createSkeletonList(REQUESTS_PER_PAGE)
 
-  const requestsList = isLoading ? (
-    skeletonList
-  ) : filteredRequests.length > 0 ? (
-    filteredRequests.map((request) => (
-      <RequestCard key={request.id} request={request} />
-    ))
-  ) : (
-    <p className='text-center text-3xl'>
-      За заданими параметрами немає результатів
-    </p>
-  )
+  const requestsList =
+    isLoading || !requests ? (
+      skeletonList
+    ) : filteredRequests.length > 0 ? (
+      filteredRequests.map((request) => (
+        <RequestCard key={request.id} request={request} />
+      ))
+    ) : (
+      <p className='text-center text-3xl'>
+        За заданими параметрами немає результатів
+      </p>
+    )
   return (
     <Wrapper variant='page'>
       <Intro isHome={isHome}>

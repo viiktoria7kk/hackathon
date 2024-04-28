@@ -72,7 +72,7 @@ for (let i = 4; i <= 15; i++) {
     content: `This is the ${i}th post content`,
     category: 'Правова допомога',
     isActive: true,
-    user_id: i,
+    user_id: `${i}`,
     user: {
       firstName: 'vikaaa',
       lastName: 'z',
