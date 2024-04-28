@@ -20,12 +20,20 @@ const Header: FC = () => {
             <div>App</div>
             <div className='flex items-center gap-3'>
               {user ? (
-                <Link
-                  className={cn(buttonVariants({ variant: 'ghost' }))}
-                  to={Routes.PROFILE}
-                >
-                  Профіль
-                </Link>
+                <>
+                  <Link
+                    className={cn(buttonVariants({ variant: 'ghost' }))}
+                    to={Routes.REQUESTS}
+                  >
+                    Запити
+                  </Link>
+                  <Link
+                    className={cn(buttonVariants({ variant: 'ghost' }))}
+                    to={Routes.PROFILE}
+                  >
+                    Профіль
+                  </Link>
+                </>
               ) : (
                 <>
                   <Link

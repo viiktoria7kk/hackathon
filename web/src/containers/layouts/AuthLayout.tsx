@@ -14,6 +14,7 @@ const AuthLayout: FC = () => {
     navigate(Routes.HOME)
     return null
   }
+
   return (
     <Wrapper variant='auth'>
       <Suspense fallback={<Loader variant='pageLoader' />}>
