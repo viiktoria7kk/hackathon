@@ -63,10 +63,9 @@ model Posts {
 
 model Chat {
   id String @id @default(uuid())
-  senderId String @map("sender_id")
-  receiverId String @map("receiver_id")
+  userId String @map("user_id")
   createdAt DateTime @default(now()) @map("created_at")
-  content String
+  message String
 
   @@map("chat")
 }
