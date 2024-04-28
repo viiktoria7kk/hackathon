@@ -44,6 +44,7 @@ const SignInForm: FC = () => {
         localStorage.setItem('ACCESS_TOKEN', res.accessToken)
         localStorage.setItem('USER_ID', res.id)
         navigate(Routes.HOME)
+        window.location.reload()
       })
       .catch((error) => {
         console.error('Error:', error)

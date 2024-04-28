@@ -28,7 +28,7 @@ export function PostModal({
             {id ? 'Edit post ' : 'Add post'}
           </DialogDescription>
         </DialogHeader>
-        <PostForm id={id} setIsOpen={setIsOpen}  />
+        <PostForm id={id} setIsOpen={setIsOpen} />
       </DialogContent>
     </Dialog>
   )

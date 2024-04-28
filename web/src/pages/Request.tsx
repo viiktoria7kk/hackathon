@@ -1,23 +1,27 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { Skeleton } from '~/components/Skeleton'
+import Wrapper from '~/containers/layouts/Wrapper'
 import { useRequestsStore } from '~/store/requestsStore'
 
 const Request = () => {
   const { id } = useParams()
 
-  const { request, isLoading, getRequestById } = useRequestsStore()
+  const { request } = useRequestsStore()
+  const { isLoading, getRequestById } = useRequestsStore()
 
   useEffect(() => {
-    void getRequestById(id || '')
-  }, [])
+    getRequestById(id || '').catch((error) => {
+      console.error(error)
+    })
+  }, [id, getRequestById])
 
   if (isLoading) {
-    return <Skeleton />
+    return <Skeleton className='w-28 h-28' />
   }
 
   return (
-    <div>
+    <Wrapper variant='page'>
       <h2>{request?.title}</h2>
       <p>{request?.description}</p>
       <p>Created At: {request?.createdAt}</p>
@@ -30,7 +34,7 @@ const Request = () => {
         </p>
         {request?.user?.avatar && <img src={request.user.avatar} />}
       </div>
-    </div>
+    </Wrapper>
   )
 }
 
