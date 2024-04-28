@@ -34,14 +34,22 @@ export const user: UserType = {
 }
 
 export const useUserStore = create<UserStore>((set, get) => ({
-  user,
+  user: null,
   accessToken: localStorage.getItem('ACCESS_TOKEN') || null,
   getUser: async (id) => {
     if (!id) return set({ error: 'User ID is required' })
     set({ isLoading: true })
     try {
       const fetchedUser = await userService.getUser(id)
-      set({ user: fetchedUser, isLoading: false })
+      set({
+        user: {
+          ...fetchedUser,
+          requests,
+          avatar:
+            'https://icons.veryicon.com/png/o/miscellaneous/standard/avatar-15.png'
+        },
+        isLoading: false
+      })
     } catch (error) {
       set({ error, isLoading: false })
     }

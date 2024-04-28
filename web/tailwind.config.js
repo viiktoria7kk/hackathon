@@ -73,8 +73,8 @@ module.exports = {
       }
     },
     backgroundImage: {
-      home: 'url(./src/assets/images/home/bg.png)',
-      request: 'url(./src/assets/images/requests/bg.png)',
+      home: 'url(https://i.pinimg.com/564x/3a/d4/51/3ad45176d8bd408cad965e538dd82930.jpg)',
+      request: 'url(https://zn.ua/img/article/4960/48_main-v1683631559.jpg)',
       'intro-gradient':
         'linear-gradient(to right, rgb(56, 189, 248), rgb(37, 99, 235))'
     }
