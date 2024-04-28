@@ -19,7 +19,7 @@ const BannerCard: FC<BannerCardProps> = ({ bannerCard }) => {
         <p className='text-center text-lg font-normal'>{description}</p>
       </div>
       <Link
-        className={cn(buttonVariants({ size: 'lg' }), {
+        className={cn(buttonVariants({ size: 'lg' }), 'text-base', {
           'bg-red-600 hover:bg-red-600/90': !isUser
         })}
         to={path}

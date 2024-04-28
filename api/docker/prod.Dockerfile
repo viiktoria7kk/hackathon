@@ -10,6 +10,8 @@ RUN pnpm i
 
 COPY . .
 
+RUN npx prisma generate
+
 RUN pnpm build
 
 CMD [ "node", "./dist/main.js" ]

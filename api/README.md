@@ -29,6 +29,13 @@ $ pnpm i
 
 #### Local
 
+
+Run the docker containers using:
+
+```bash
+$ docker-compose up db mail
+```
+
 Start the application using:
 
 ```bash
@@ -46,7 +53,7 @@ $ docker-compose build api
 Once the Docker images are built successfully, run the containers using:
 
 ```bash
-$ docker-compose up api
+$ docker-compose up api db mail
 ```
 
 ### Production:
