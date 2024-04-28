@@ -10,7 +10,7 @@ const AppLayout: FC = () => {
   return (
     <>
       <Header />
-      <Wrapper className='relative flex flex-col flex-1 flex-grow '>
+      <Wrapper variant='app'>
         <Suspense fallback={<Loader variant='pageLoader' />}>
           <Outlet />
         </Suspense>

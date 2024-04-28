@@ -76,7 +76,8 @@ export class AuthService {
     })
 
     return {
-      accessToken
+      accessToken,
+      id: isExistingUser.id
     }
   }
 }

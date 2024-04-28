@@ -28,6 +28,10 @@ export class TokenService {
   }
 
   validateAccessToken(token: string) {
-    return jwt.verify(token, env.ACCESS_TOKEN_SECRET_KEY)
+    try {
+      return jwt.verify(token, env.ACCESS_TOKEN_SECRET_KEY)
+    } catch (error) {
+      return false
+    }
   }
 }
