@@ -10,6 +10,7 @@ import {
   MessageCircle
 } from 'lucide-react'
 import UserRequests from '~/containers/profile/UserRequests'
+import ChatsSection from '~/containers/profile/Chats'
 
 export const tabsData: ProfileTabsData = {
   [ProfileTabsEnum.Profile]: {
@@ -29,7 +30,7 @@ export const tabsData: ProfileTabsData = {
   },
   [ProfileTabsEnum.Chats]: {
     title: 'Chats',
-    content: <div>Chats</div>,
+    content: <ChatsSection />,
     icon: <MessageCircle />
   }
 }

@@ -23,7 +23,7 @@ const ProfileLayout = ({ children }: ProfileLayoutProps) => {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink to='/profile'>Component</BreadcrumbLink>
+              <BreadcrumbLink to='/profile'>Profile</BreadcrumbLink>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>

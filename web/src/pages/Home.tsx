@@ -27,7 +27,7 @@ const Home = () => {
         </h3>
       </Intro>
       <Categories />
-      <Banner />
+      {localStorage.getItem('USER_ID') ? null : <Banner />}
       <FAQContainer />
     </Wrapper>
   )

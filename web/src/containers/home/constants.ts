@@ -35,7 +35,7 @@ export const Categories = {
   HUMANITARIAN_AID: 'Гуманітарна допомога',
   LEGAL_ASSISTANCE: 'Правова допомога',
   HOTLINE_SERVICES: 'Гарячі лінії',
-  MEDICAL_HELP: 'Медична допопмога',
+  MEDICAL_HELP: 'Медична допопога',
   INITIATIVES_AND_PROGRAMS: 'Ініціативи та програми'
 }
 
@@ -51,7 +51,7 @@ export const categories: CategoryType[] = [
     image: law
   },
   {
-    title: 'Медична допопмога',
+    title: 'Медична допомога',
     category: Categories.MEDICAL_HELP,
     image: medical
   },
@@ -79,22 +79,25 @@ type FAQType = {
 
 export const FAQList: FAQType[] = [
   {
-    title: 'What is TypeScript?',
+    title: 'Чому волонтерство важливе?',
     description:
-      'TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.'
+      'Волонтерство важливе, оскільки воно сприяє покращенню якості життя уразливих груп населення, розвитку спільнот та підтримці недооцінених справ. Волонтери відіграють ключову роль у вирішенні соціальних проблем, сприяючи змінам у суспільстві та вносячи позитивний вклад у світ.'
   },
   {
-    title: 'What is AI?',
+    title:
+      'Які переваги та користі можна отримати від участі в волонтерських програмах?',
     description:
-      'AI, or Artificial Intelligence, is a branch of computer science that aims to imbue software with the ability to analyze its environment using either predetermined rules and search algorithms, or pattern recognizing machine learning models, and make decisions based on those analyses.'
+      "Участь у волонтерських програмах дарує можливість розвитку нових навичок, розширенню соціальних зв'язків та отриманню задоволення від допомоги іншим. Волонтерство також сприяє самореалізації та підвищенню самооцінки, допомагаючи відчути себе частиною чогось більшого і значущого."
   },
   {
-    title: 'What is Machine Learning?',
+    title: 'Як можна знайти відповідну волонтерську можливість?',
     description:
-      'Machine Learning is a field of study that gives computers the ability to learn without being explicitly programmed.'
+      'Знаходження волонтерських можливостей може розпочатися з пошуку організацій, які працюють у сфері, яка вас цікавить. Важливо враховувати власні цінності, інтереси та доступні можливості для волонтерства. Деякі ресурси, такі як сайти волонтерських організацій або платформи для знаходження волонтерських проектів, можуть також допомогти в цьому процесі.'
   },
   {
-    title: 'What is GitHub Copilot?',
-    description: 'GitHub Copilot is an AI-powered code completion tool.'
+    title:
+      "Які обов'язки і відповідальності зазвичай пов'язані з волонтерством?",
+    description:
+      "Волонтерство передбачає виконання різноманітних завдань, що можуть варіюватися від підтримки у виконанні рутинних обов'язків до участі у складних проектах або подіях. Від волонтера очікується відданість цілям організації, згуртованість з іншими волонтерами та дотримання внутрішніх правил і процедур, щоб забезпечити успішне виконання місії організації."
   }
 ]

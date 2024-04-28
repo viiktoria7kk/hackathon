@@ -1,14 +1,8 @@
 import { User2Icon } from 'lucide-react'
-import { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { toast } from 'sonner'
+import { Link, useParams } from 'react-router-dom'
 import { Badge } from '~/components/Badge'
-import { Button } from '~/components/Button'
-import { Skeleton } from '~/components/Skeleton'
 import Wrapper from '~/containers/layouts/Wrapper'
-import { requestsService } from '~/services/requests'
 import { useRequestsStore } from '~/store/requestsStore'
-import { useUserStore } from '~/store/userStore'
 import { normalizeDate } from '~/utils'
 
 const Request = () => {
@@ -16,9 +10,6 @@ const Request = () => {
 
   const { requests } = useRequestsStore()
 
-  const handlePingMessage = () => {
-    toast.success('Повідомлення надіслано користувачу на пошту!')
-  }
   const request = requests?.filter((request) => request.id === id)[0]
 
   return (
@@ -55,9 +46,7 @@ const Request = () => {
               </div>
             </div>
           </div>
-          <Button onClick={handlePingMessage}>
-            Надіслати сповіщення на пошту
-          </Button>
+          <Link to={`/chat/${request.user_id}`}>Надіслати повідомлення</Link>
         </article>
       </div>
     </Wrapper>

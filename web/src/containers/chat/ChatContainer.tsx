@@ -21,10 +21,11 @@ const ChatBody = () => {
   }
 
   useEffect(() => {
-    socket.current = io(import.meta.env.VITE_HOST_URL as string)
+    socket.current = io(import.meta.env.VITE_SERVER_URL + 'chat/message')
     setUserId(localStorage.getItem('user_id'))
 
     socket.current.on('response', (message: string) => {
+      console.log(1, message)
       setMessages((prevMessages) => [...prevMessages, JSON.parse(message)])
     })
 
@@ -39,10 +40,20 @@ const ChatBody = () => {
 
   const onSendMessage = () => {
     const data = {
-      userId: userId,
+      userId: '0b6651a9-698d-4d97-8c86-1154c44e2bd7',
       message: value
     }
-    socket.current?.emit('message', JSON.stringify(data))
+    socket.current?.emit(
+      'message',
+      JSON.stringify(data),
+      (acknowledgement: string) => {
+        if (acknowledgement === 'Message received') {
+          console.log('Data was sent successfully')
+        } else {
+          console.log('Data sending failed')
+        }
+      }
+    )
     setValue('')
   }
 
