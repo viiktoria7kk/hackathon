@@ -7,7 +7,7 @@ const loaderVariants = cva('', {
   variants: {
     variant: {
       default: '',
-      pageLoader: 'flex flex-1 flex-grow justify-center items-center'
+      pageLoader: 'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
     },
     size: {
       default: 'h-20 px-4 py-2',
@@ -30,7 +30,7 @@ export interface LoaderProps
 const Loader: FC<LoaderProps> = ({ className, variant, size }) => {
   return (
     <div className={cn(loaderVariants({ variant, size, className }))}>
-      <Loader2 className='mr-2 h-16 w-16 animate-spin text-zinc-400' />
+      <Loader2 className='mr-2 h-16 w-16 animate-spin text-zinc-400 ' />
     </div>
   )
 }

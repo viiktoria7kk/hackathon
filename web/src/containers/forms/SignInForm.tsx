@@ -1,35 +1,58 @@
-import { FC } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { FC, useState } from 'react'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { toast } from 'sonner'
+import { ArrowRight, Loader2 } from 'lucide-react'
 
 import { Button, buttonVariants } from '~/components/Button'
 import { Input } from '~/components/Input'
+import { Role } from '~/constants/enums'
 import { Label } from '~/components/Label'
-import { ArrowRight, Loader2 } from 'lucide-react'
 
-import { cn } from '~/utils'
+import { cn, createUrlPath } from '~/utils'
 import {
-  AuthCredentialsValiador,
-  TAuthCredentialsValiador
+  AuthSignInCredentialsValiador,
+  TAuthSignInCredentialsValiador
 } from '~/utils/validators/AccountCredentials'
+import { Routes } from '~/constants/routes'
+import { AuthService } from '~/services/auth'
 
 const SignInForm: FC = () => {
   const [searchParams] = useSearchParams()
 
-  const isVolonteer = searchParams.get('as') === 'volonteer'
+  const isVolunteer = searchParams.get('as') === 'volunteer'
 
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<TAuthCredentialsValiador>({
-    resolver: zodResolver(AuthCredentialsValiador)
+  } = useForm<TAuthSignInCredentialsValiador>({
+    resolver: zodResolver(AuthSignInCredentialsValiador)
   })
-  const isLoading = false
-
-  const onSubmit = ({ email, password }: TAuthCredentialsValiador) => {
-    console.log(email, password)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const navigate = useNavigate()
+  const onSubmit = ({ email, password }: TAuthSignInCredentialsValiador) => {
+    setIsLoading(true)
+    AuthService.signIn({
+      email,
+      password,
+      role: Role.USER
+    })
+      .then((res) => {
+        toast.success('Успішно увійшли')
+        localStorage.setItem('ACCESS_TOKEN', res.accessToken)
+        localStorage.setItem('USER_ID', res.id)
+        navigate(Routes.HOME)
+        window.location.reload()
+      })
+      .catch((error) => {
+        console.error('Error:', error)
+        toast.error('Помилка')
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   return (
@@ -37,10 +60,10 @@ const SignInForm: FC = () => {
       <div className='flex flex-col gap-3'>
         <div className='flex flex-col items-center space-y-2 text-center'>
           <h1 className='text-xl font-bold'>
-            Увійти як {isVolonteer ? 'волонтер' : 'користувач'}
+            Увійти як {isVolunteer ? 'волонтер' : 'користувач'}
           </h1>
         </div>
-        <form onSubmit={void handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className='grid gap-2'>
             <div className='grid gap-1 py-2'>
               <Label htmlFor='email'>Пошта</Label>
@@ -90,21 +113,20 @@ const SignInForm: FC = () => {
             </span>
           </div>
         </div>
-        {isVolonteer ? (
-          <Button disabled={isLoading} variant='secondary'>
-            Увійти як користувач
-          </Button>
-        ) : (
-          <Button disabled={isLoading} variant='secondary'>
-            Продовжити як волонтер
-          </Button>
-        )}
+        <Link
+          className={cn(buttonVariants({ variant: 'secondary' }))}
+          to={createUrlPath(Routes.SIGN_IN, '', {
+            as: isVolunteer ? 'user' : 'volunteer'
+          })}
+        >
+          Продовжити як {isVolunteer ? 'користувач' : 'волонтер'}
+        </Link>
         <div className='flex flex-col items-center space-y-2 text-center'>
           <Link
             className={cn(
               buttonVariants({ variant: 'link', className: 'gap-1.5' })
             )}
-            to='/sign-up'
+            to={Routes.SIGN_UP}
           >
             Досі немаєте акаунту? Зареєструватися
             <ArrowRight className='h-4 w-4' />

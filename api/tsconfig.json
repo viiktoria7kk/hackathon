@@ -22,10 +22,9 @@
       "@core/*": ["src/core/*"],
       "@configs/*": ["src/core/configs/*"],
       "@modules/*": ["src/modules/*"],
-      "@utils/*": ["src/utils/*"]
-    },
+      "@utils/*": ["src/utils/*"],
+      "@nestjs/websockets": ["node_modules/@nestjs/websockets"]
+    }
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

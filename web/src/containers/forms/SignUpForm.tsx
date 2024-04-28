@@ -1,35 +1,75 @@
-import { FC } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { FC, useState } from 'react'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { toast } from 'sonner'
 
 import { Button, buttonVariants } from '~/components/Button'
 import { Input } from '~/components/Input'
 import { Label } from '~/components/Label'
-import { ArrowRight, Loader2 } from 'lucide-react'
+import { ArrowRight, EyeIcon, EyeOffIcon, Loader2 } from 'lucide-react'
 
-import { cn } from '~/utils'
+import { cn, createUrlPath } from '~/utils'
 import {
-  AuthCredentialsValiador,
-  TAuthCredentialsValiador
+  AuthSignUpCredentialsValiador,
+  TAuthSignUpCredentialsValiador
 } from '~/utils/validators/AccountCredentials'
+import { Routes } from '~/constants/routes'
+import { Role } from '~/constants/enums'
+import { AuthService } from '~/services/auth'
 
 const SignUpForm: FC = () => {
   const [searchParams] = useSearchParams()
+  const [showPassword, setShowPassword] = useState<boolean>(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false)
 
-  const isVolonteer = searchParams.get('as') === 'volonteer'
+  const isVolunteer = searchParams.get('as') === 'volunteer'
+
+  const toggleShowPassword = () => {
+    setShowPassword((prevState) => !prevState)
+  }
+
+  const toggleShowConfirmPassword = () => {
+    setShowConfirmPassword((prevState) => !prevState)
+  }
 
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<TAuthCredentialsValiador>({
-    resolver: zodResolver(AuthCredentialsValiador)
+  } = useForm<TAuthSignUpCredentialsValiador>({
+    resolver: zodResolver(AuthSignUpCredentialsValiador)
   })
-  const isLoading = false
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const navigate = useNavigate()
 
-  const onSubmit = ({ email, password }: TAuthCredentialsValiador) => {
-    console.log(email, password)
+  const onSubmit = ({
+    lastName,
+    firstName,
+    email,
+    password,
+    confirmPassword
+  }: TAuthSignUpCredentialsValiador) => {
+    setIsLoading(true)
+    AuthService.signUp({
+      confirmPassword,
+      email,
+      firstName,
+      lastName,
+      password,
+      role: Role.USER
+    })
+      .then(() => {
+        toast.success('Успішно зареєстровано')
+        navigate(Routes.HOME)
+      })
+      .catch((error) => {
+        console.error('Error:', error)
+        toast.error('Помилка')
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   return (
@@ -37,11 +77,44 @@ const SignUpForm: FC = () => {
       <div className='flex flex-col gap-3'>
         <div className='flex flex-col items-center space-y-2 text-center'>
           <h1 className='text-xl font-bold'>
-            Увійти як {isVolonteer ? 'волонтер' : 'користувач'}
+            Зареєструватись як {isVolunteer ? 'волонтер' : 'користувач'}
           </h1>
         </div>
-        <form onSubmit={void handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className='grid gap-2'>
+            <div className='grid gap-1 py-2 grid-cols-2'>
+              <div>
+                <Label htmlFor='lastName'>Прізвище</Label>
+                <Input
+                  {...register('lastName')}
+                  className={cn({
+                    'focus-visible:ring-red-500': errors.lastName
+                  })}
+                  placeholder='Введіть прізвище'
+                />
+                {errors?.lastName && (
+                  <p className='text sm text-red-500'>
+                    {errors.lastName.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <Label htmlFor='firstName'>Ім&apos;я</Label>
+                <Input
+                  {...register('firstName')}
+                  className={cn({
+                    'focus-visible:ring-red-500': errors.firstName
+                  })}
+                  placeholder='Введіть імя'
+                  type='text'
+                />
+                {errors?.firstName && (
+                  <p className='text sm text-red-500'>
+                    {errors.firstName.message}
+                  </p>
+                )}
+              </div>
+            </div>
             <div className='grid gap-1 py-2'>
               <Label htmlFor='email'>Пошта</Label>
               <Input
@@ -49,7 +122,8 @@ const SignUpForm: FC = () => {
                 className={cn({
                   'focus-visible:ring-red-500': errors.email
                 })}
-                placeholder='you@example.com'
+                placeholder='Введіть свою електронну пошту'
+                type='email'
               />
               {errors?.email && (
                 <p className='text sm text-red-500'>{errors.email.message}</p>
@@ -57,23 +131,63 @@ const SignUpForm: FC = () => {
             </div>
             <div className='grid gap-1 py-2'>
               <Label htmlFor='password'>Пароль</Label>
-              <Input
-                {...register('password')}
-                className={cn({
-                  'focus-visible:ring-red-500': errors.password
-                })}
-                placeholder='Введіть пароль'
-                type='password'
-              />
+              <div className='relative'>
+                <Input
+                  {...register('password')}
+                  className={cn({
+                    'focus-visible:ring-red-500': errors.password
+                  })}
+                  placeholder='Введіть пароль'
+                  type={showPassword ? 'text' : 'password'}
+                />
+                <button
+                  className='absolute right-0 top-0 mt-2 mr-2'
+                  onClick={() => toggleShowPassword()}
+                >
+                  {showPassword ? (
+                    <EyeOffIcon aria-hidden='true' className='h-6 w-6' />
+                  ) : (
+                    <EyeIcon aria-hidden='true' className='h-6 w-6' />
+                  )}
+                </button>
+              </div>
               {errors?.password && (
                 <p className='text sm text-red-500'>
                   {errors.password.message}
                 </p>
               )}
             </div>
+            <div className='grid gap-1 py-2'>
+              <Label htmlFor='confirmPassword'>Підтвердити пароль</Label>
+              <div className='relative'>
+                <Input
+                  {...register('confirmPassword')}
+                  className={cn({
+                    'focus-visible:ring-red-500': errors.confirmPassword
+                  })}
+                  placeholder='Введіть підтвердження паролю'
+                  type={showConfirmPassword ? 'text' : 'password'}
+                />
+                <button
+                  className='absolute right-0 top-0 mt-2 mr-2'
+                  onClick={() => toggleShowConfirmPassword()}
+                >
+                  {showConfirmPassword ? (
+                    <EyeOffIcon aria-hidden='true' className='h-6 w-6' />
+                  ) : (
+                    <EyeIcon aria-hidden='true' className='h-6 w-6' />
+                  )}
+                </button>
+              </div>
+              {errors?.confirmPassword && (
+                <p className='text sm text-red-500'>
+                  {errors.confirmPassword.message}
+                </p>
+              )}
+            </div>
             <Button disabled={isLoading} type='submit'>
               {isLoading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
-              Увійти
+              Зареєструватись
             </Button>
           </div>
         </form>
@@ -90,23 +204,22 @@ const SignUpForm: FC = () => {
             </span>
           </div>
         </div>
-        {isVolonteer ? (
-          <Button disabled={isLoading} variant='secondary'>
-            Увійти як користувач
-          </Button>
-        ) : (
-          <Button disabled={isLoading} variant='secondary'>
-            Продовжити як волонтер
-          </Button>
-        )}
+        <Link
+          className={cn(buttonVariants({ variant: 'secondary' }))}
+          to={createUrlPath(Routes.SIGN_UP, '', {
+            as: isVolunteer ? 'user' : 'volunteer'
+          })}
+        >
+          Зареєструватись як {isVolunteer ? 'користувач' : 'волонтер'}
+        </Link>
         <div className='flex flex-col items-center space-y-2 text-center'>
           <Link
             className={cn(
               buttonVariants({ variant: 'link', className: 'gap-1.5' })
             )}
-            to='/sign-up'
+            to={Routes.SIGN_IN}
           >
-            Досі немаєте акаунту? Зареєструватися
+            Вже є акаунт? Авторизуватись
             <ArrowRight className='h-4 w-4' />
           </Link>
         </div>

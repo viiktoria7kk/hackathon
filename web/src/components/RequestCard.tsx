@@ -1,3 +1,4 @@
+import { ReactElement } from 'react'
 import { Link } from 'react-router-dom'
 import { User2Icon } from 'lucide-react'
 
@@ -11,17 +12,19 @@ import { Routes } from '~/constants/routes'
 
 type RequestCardProps = {
   request: RequestType
+  menu?: ReactElement
 }
-const RequestCard = ({ request }: RequestCardProps) => {
-  const { id, title, description, category, createdBy, createdAt } = request
+const RequestCard = ({ request, menu }: RequestCardProps) => {
+  const { id, title, description, category, createdAt, user } = request
 
   return (
-    <article className='bg-white rounded-md px-7 pt-4 pb-8 shadow-md transition'>
+    <article className='  bg-white rounded-md px-7 pt-4 pb-8 shadow-md transition'>
       <div className='flex flex-col gap-1'>
+        <div className=' flex items-center justify-end gap-2'>{menu}</div>
         <div className='flex justify-between items-center text-zinc-400 text-sm'>
           <span className='flex gap-1 items-center'>
             <User2Icon size={24} />
-            {createdBy}
+            {user.firstName} {user.lastName}
           </span>
           <span>{normalizeDate(createdAt)}</span>
         </div>
