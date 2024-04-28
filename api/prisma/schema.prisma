@@ -40,6 +40,8 @@ model User {
   avatar String?
   posts Posts[]
 
+  respondedPosts RespondedPosts[]
+
   @@map("users")
 }
 
@@ -54,6 +56,8 @@ model Posts {
   userId String @map("user_id")
   user User @relation(fields: [userId], references: [id])
 
+  respondedPosts RespondedPosts[]
+
   @@map("posts")
 }
 
@@ -65,4 +69,16 @@ model Chat {
   content String
 
   @@map("chat")
+}
+
+model RespondedPosts {
+  id String @id @default(uuid())
+
+  postId String @map("post_id")
+  post Posts @relation(fields: [postId], references: [id])
+
+  volunteerId String @map("volunteer_id")
+  volunteer User @relation(fields: [volunteerId], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
 }
