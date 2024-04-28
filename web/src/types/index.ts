@@ -99,3 +99,12 @@ export type RequestsCreateParams = {
   isActive: boolean
   userId: string
 }
+
+export type ChatMessage = {
+  id: string
+  userId: string
+  name: string
+  message: string
+  time: string
+  avatar: string
+}
