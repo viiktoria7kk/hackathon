@@ -18,6 +18,7 @@ const Request = lazy(() => import('~/pages/Request'))
 const Profile = lazy(() => import('~/pages/Profile'))
 const SignIn = lazy(() => import('~/pages/SignIn'))
 const SignUp = lazy(() => import('~/pages/SignUp'))
+const Chat = lazy(() => import('~/pages/Chat'))
 
 export const routerConfig = (
   <Route element={<App />} path='/'>
@@ -26,6 +27,7 @@ export const routerConfig = (
       <Route element={<Requests />} path={Routes.REQUESTS} />
       <Route element={<Request />} path={Routes.REQUEST} />
       <Route element={<Profile />} path={Routes.PROFILE} />
+      <Route element={<Chat />} path={Routes.CHAT} />
       <Route element={<div>Settings</div>} path={Routes.SETTINGS} />
     </Route>
     <Route element={<AuthLayout />}>
