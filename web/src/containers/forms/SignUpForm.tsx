@@ -42,7 +42,7 @@ const SignUpForm: FC = () => {
   })
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const navigate = useNavigate()
-  console.log(isLoading)
+
   const onSubmit = ({
     lastName,
     firstName,

@@ -8,12 +8,7 @@ import { useUserStore } from '~/store/userStore'
 import Intro from '~/components/Intro'
 
 const Home = () => {
-  const { accessToken } = useUserStore()
   const isHome = window.location.pathname === '/'
-
-  useEffect(() => {
-    console.log(accessToken)
-  }, [accessToken])
 
   return (
     <Wrapper variant='page'>
