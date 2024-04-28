@@ -1,5 +1,5 @@
 import { PostsService } from './posts.service'
-import { Posts, Categories } from '@prisma/client'
+import { Posts } from '@prisma/client'
 import {
   Body,
   Controller,
@@ -8,7 +8,6 @@ import {
   Param,
   Post,
   Put,
-  Query,
   UseGuards
 } from '@nestjs/common'
 import { AuthGuard } from '@core/guards/auth.guard'
@@ -33,6 +32,7 @@ export class PostsController {
     return await this.postsService.createPost(data)
   }
 
+  @UseGuards(AuthGuard)
   @Put('/:id')
   async updatePost(
     @Param('id') id: string,
@@ -41,36 +41,9 @@ export class PostsController {
     return await this.postsService.updatePost({ where: { id }, data })
   }
 
+  @UseGuards(AuthGuard)
   @Delete(':id')
   async deletePost(@Param('id') id: string): Promise<Posts> {
     return await this.postsService.deletePost({ id })
-  }
-
-  @Get('title/:title')
-  async getPostsByTitle(@Param('title') title: string): Promise<Posts[]> {
-    return await this.postsService.getPostsByTitle(title)
-  }
-
-  @Get('category/:category')
-  async getPostsByCategory(
-    @Param('category') category: Categories
-  ): Promise<Posts[]> {
-    return await this.postsService.getPostsByCategory(category)
-  }
-
-  @Get('author/:user_id')
-  async getPostsByAuthor(@Param('user_id') user_id: string): Promise<Posts[]> {
-    return await this.postsService.getPostsByAuthor(user_id)
-  }
-
-  @Get('filter/tc')
-  async getPostsByTitleAndCategory(
-    @Query('title') title: string,
-    @Query('category') category: Categories
-  ): Promise<Posts[]> {
-    return await this.postsService.getPostsByTitleAndCategory({
-      title,
-      category
-    })
   }
 }
