@@ -35,7 +35,9 @@ const Requests = () => {
   )
 
   useEffect(() => {
-    void getRequests()
+    getRequests().catch((error) => {
+      console.error(error)
+    })
   }, [])
 
   const totalPages = isLoading
