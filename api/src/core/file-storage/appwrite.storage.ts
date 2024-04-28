@@ -56,7 +56,7 @@ export class AppWriteStorage implements FileStorage {
     const buffer = await this.storage.getFileDownload(this.bucket, key)
 
     return {
-      buffer,
+      buffer: Buffer.from(buffer),
       size: file.sizeOriginal,
       mimetype: file.mimeType,
       originalname: file.name
