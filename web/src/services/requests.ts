@@ -8,6 +8,9 @@ export const requestsService = {
   getRequests: (): Promise<RequestType[]> => {
     return api.get(Requests.REQUESTS).json()
   },
+  getRequestById: (id: string): Promise<RequestType> => {
+    return api.get(`${Requests.REQUESTS}/${id}`).json()
+  },
   createRequest: (data: RequestsCreateParams): Promise<RequestType> => {
     return api
       .post(Requests.REQUESTS, {
