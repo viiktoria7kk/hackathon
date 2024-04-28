@@ -1,7 +1,8 @@
 import { FC, useState } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { toast } from 'sonner'
 
 import { Button, buttonVariants } from '~/components/Button'
 import { Input } from '~/components/Input'
@@ -14,6 +15,8 @@ import {
   TAuthSignUpCredentialsValiador
 } from '~/utils/validators/AccountCredentials'
 import { Routes } from '~/constants/routes'
+import { Role } from '~/constants/enums'
+import { AuthService } from '~/services/auth'
 
 const SignUpForm: FC = () => {
   const [searchParams] = useSearchParams()
@@ -37,8 +40,9 @@ const SignUpForm: FC = () => {
   } = useForm<TAuthSignUpCredentialsValiador>({
     resolver: zodResolver(AuthSignUpCredentialsValiador)
   })
-  const isLoading = false
-
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const navigate = useNavigate()
+  console.log(isLoading)
   const onSubmit = ({
     lastName,
     firstName,
@@ -46,7 +50,26 @@ const SignUpForm: FC = () => {
     password,
     confirmPassword
   }: TAuthSignUpCredentialsValiador) => {
-    console.log(lastName, firstName, email, password, confirmPassword)
+    setIsLoading(true)
+    AuthService.signUp({
+      confirmPassword,
+      email,
+      firstName,
+      lastName,
+      password,
+      role: Role.USER
+    })
+      .then(() => {
+        toast.success('Успішно зареєстровано')
+        navigate(Routes.HOME)
+      })
+      .catch((error) => {
+        console.error('Error:', error)
+        toast.error('Помилка')
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   return (
@@ -57,7 +80,7 @@ const SignUpForm: FC = () => {
             Зареєструватись як {isVolunteer ? 'волонтер' : 'користувач'}
           </h1>
         </div>
-        <form onSubmit={void handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className='grid gap-2'>
             <div className='grid gap-1 py-2 grid-cols-2'>
               <div>

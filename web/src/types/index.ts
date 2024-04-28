@@ -1,16 +1,30 @@
 import { Role } from '~/constants/enums'
 import { Categories } from '~/containers/home/constants'
 
+export type UserType = {
+  id: string
+  firstName: string
+  lastName: string
+  email: string
+  role: Role.USER | Role.VOLUNTEER
+  avatar: string
+  password: string
+}
+
 export type RequestType = {
   id: string
   title: string
   description: string
   createdAt: string
   content: string
-  category: string
+  category: (typeof Categories)[keyof typeof Categories]
   isActive: boolean
   user_id: number
-  createdBy: string
+  user: {
+    firstName: string
+    lastName: string
+    avatar: null | string
+  }
 }
 
 export type CategoryType = {
@@ -34,7 +48,7 @@ export type SignInParams = {
 }
 
 export type SignInResponse = {
-  message: string
+  accessToken: string
 }
 
 export type SignUpParams = {
@@ -48,4 +62,13 @@ export type SignUpParams = {
 
 export type SignUpResponse = {
   accessToken: string
+}
+
+export type RequestsCreateParams = {
+  title: string
+  description: string
+  content: string
+  category: (typeof Categories)[keyof typeof Categories]
+  isActive: boolean
+  userId: string
 }

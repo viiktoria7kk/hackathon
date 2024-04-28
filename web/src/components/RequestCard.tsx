@@ -13,7 +13,7 @@ type RequestCardProps = {
   request: RequestType
 }
 const RequestCard = ({ request }: RequestCardProps) => {
-  const { id, title, description, category, createdBy, createdAt } = request
+  const { id, title, description, category, createdAt, user } = request
 
   return (
     <article className='bg-white rounded-md px-7 pt-4 pb-8 shadow-md transition'>
@@ -21,7 +21,7 @@ const RequestCard = ({ request }: RequestCardProps) => {
         <div className='flex justify-between items-center text-zinc-400 text-sm'>
           <span className='flex gap-1 items-center'>
             <User2Icon size={24} />
-            {createdBy}
+            {user.firstName} {user.lastName}
           </span>
           <span>{normalizeDate(createdAt)}</span>
         </div>

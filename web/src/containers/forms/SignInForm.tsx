@@ -1,12 +1,14 @@
-import { FC } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { FC, useState } from 'react'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { toast } from 'sonner'
+import { ArrowRight, Loader2 } from 'lucide-react'
 
 import { Button, buttonVariants } from '~/components/Button'
 import { Input } from '~/components/Input'
+import { Role } from '~/constants/enums'
 import { Label } from '~/components/Label'
-import { ArrowRight, Loader2 } from 'lucide-react'
 
 import { cn, createUrlPath } from '~/utils'
 import {
@@ -14,6 +16,7 @@ import {
   TAuthSignInCredentialsValiador
 } from '~/utils/validators/AccountCredentials'
 import { Routes } from '~/constants/routes'
+import { AuthService } from '~/services/auth'
 
 const SignInForm: FC = () => {
   const [searchParams] = useSearchParams()
@@ -27,11 +30,27 @@ const SignInForm: FC = () => {
   } = useForm<TAuthSignInCredentialsValiador>({
     resolver: zodResolver(AuthSignInCredentialsValiador)
   })
-
-  const isLoading = false
-
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const navigate = useNavigate()
   const onSubmit = ({ email, password }: TAuthSignInCredentialsValiador) => {
-    console.log(email, password)
+    setIsLoading(true)
+    AuthService.signIn({
+      email,
+      password,
+      role: Role.USER
+    })
+      .then((res) => {
+        toast.success('Успішно увійшли')
+        localStorage.setItem('ACCESS_TOKEN', res.accessToken)
+        navigate(Routes.HOME)
+      })
+      .catch((error) => {
+        console.error('Error:', error)
+        toast.error('Помилка')
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   return (
@@ -42,7 +61,7 @@ const SignInForm: FC = () => {
             Увійти як {isVolunteer ? 'волонтер' : 'користувач'}
           </h1>
         </div>
-        <form onSubmit={void handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className='grid gap-2'>
             <div className='grid gap-1 py-2'>
               <Label htmlFor='email'>Пошта</Label>
