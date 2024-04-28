@@ -31,14 +31,14 @@ const Requests = () => {
   const filteredRequests = requests.filter(
     (request) =>
       request.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      (category ? request.category === category : true)
+      (category === 'all' ? true : request.category === category)
   )
 
   useEffect(() => {
     getRequests().catch((error) => {
       console.error(error)
     })
-  }, [])
+  }, [getRequests])
 
   const totalPages = isLoading
     ? 1
@@ -71,8 +71,7 @@ const Requests = () => {
           <span className='font-bold text-2xl text-sky-400'>Ви не самі.</span>{' '}
           Наша спільнота обіцяє бути поруч з вами в найважчі миті.
           <span className='font-bold text-2xl text-sky-400'>
-            {' '}
-            Залиште свій запит{' '}
+            Залиште свій запит
           </span>
           про допомогу, i ми згуртуємося разом, щоб пройти цей шлях разом.
         </h3>

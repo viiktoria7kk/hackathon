@@ -16,14 +16,19 @@ const CategorySelect: FC = () => {
 
   const { setCategory } = useFiltersStore()
 
-  const selectItems = categories.map((category) => (
-    <SelectItem key={category} value={category}>
-      {category}
-    </SelectItem>
-  ))
+  const selectItems = [
+    <SelectItem key='all' value='all'>
+      Всі
+    </SelectItem>,
+    ...categories.map((category) => (
+      <SelectItem key={category} value={category}>
+        {category}
+      </SelectItem>
+    ))
+  ]
 
   return (
-    <Select onValueChange={setCategory}>
+    <Select defaultValue='all' onValueChange={setCategory}>
       <SelectTrigger className='max-w-[250px] text-lg focus-visible:ring-1 focus-visible:ring-offset-1 '>
         <SelectValue placeholder='Категорії' />
       </SelectTrigger>
