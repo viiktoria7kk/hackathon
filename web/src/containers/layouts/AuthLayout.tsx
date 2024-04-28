@@ -9,7 +9,7 @@ import { Routes } from '~/constants/routes'
 const AuthLayout: FC = () => {
   const user = useUserStore((state) => state.user)
   const navigate = useNavigate()
-  console.log(user)
+
   if (user) {
     navigate(Routes.HOME)
     return null
