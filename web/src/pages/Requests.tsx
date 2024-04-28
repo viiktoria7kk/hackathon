@@ -7,8 +7,8 @@ import { Skeleton } from '~/components/Skeleton'
 import PaginationContainer from '~/containers/requests/Pagination'
 import Search from '~/containers/requests/Searh'
 import { useFiltersStore } from '~/store/filtersStore'
-import { useEffect } from 'react'
 import Intro from '~/components/Intro'
+import { useUserStore } from '~/store/userStore'
 
 const REQUESTS_PER_PAGE = 5
 
@@ -21,7 +21,9 @@ const Requests = () => {
 
   const isHome = window.location.pathname === '/'
 
-  const { requests, isLoading, getRequests } = useRequestsStore()
+  const user = useUserStore((state) => state.user)
+  const { isLoading } = useRequestsStore()
+  const requests = user?.requests!
 
   const createSkeletonList = (length: number) => {
     return Array.from({ length }, (_, index) => (
@@ -35,12 +37,6 @@ const Requests = () => {
         request.title.toLowerCase().includes(searchTerm.toLowerCase())) &&
       (category === 'all' || request.category === category)
   )
-
-  useEffect(() => {
-    getRequests().catch((error) => {
-      console.error(error)
-    })
-  }, [getRequests])
 
   const totalPages = isLoading
     ? 1
