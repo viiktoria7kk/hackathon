@@ -11,6 +11,7 @@ import {
   UseGuards
 } from '@nestjs/common'
 import { AuthGuard } from '@core/guards/auth.guard'
+import { IUserRequestPayload, User } from '@core/decorators/user.decorator'
 
 @Controller('posts')
 export class PostsController {
@@ -19,6 +20,12 @@ export class PostsController {
   @Get()
   async getAllPosts(): Promise<Posts[]> {
     return await this.postsService.getAllPosts()
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('responds')
+  async getMyPostResponds(@User() user: IUserRequestPayload) {
+    return await this.postsService.getMyRespondedPosts(user)
   }
 
   @Get(':id')
@@ -33,6 +40,17 @@ export class PostsController {
   }
 
   @UseGuards(AuthGuard)
+<<<<<<< HEAD
+=======
+  @Post(':id/respond')
+  async respondToPost(
+    @Param('id') id: string,
+    @User() user: IUserRequestPayload
+  ) {
+    return this.postsService.respondToPost(id, user.id)
+  }
+
+>>>>>>> 2be4c3f (feature: added responding to posts)
   @Put('/:id')
   async updatePost(
     @Param('id') id: string,

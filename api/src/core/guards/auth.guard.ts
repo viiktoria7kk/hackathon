@@ -1,3 +1,4 @@
+import { IUserRequestPayload } from '@core/decorators/user.decorator'
 import { TokenService } from '@core/token/token.service'
 import {
   BadRequestException,
@@ -16,7 +17,9 @@ export class AuthGuard implements CanActivate {
   ) {}
 
   async canActivate(context: ExecutionContext) {
-    const request = context.switchToHttp().getRequest<Request>()
+    const request = context
+      .switchToHttp()
+      .getRequest<Request & { user: IUserRequestPayload }>()
 
     const isPublic = this.reflector.getAllAndOverride<boolean>('isPublic', [
       context.getClass(),
@@ -35,6 +38,11 @@ export class AuthGuard implements CanActivate {
     const [, token] = authHeader.split(' ')
 
     const isValidToken = this.tokenService.validateAccessToken(token)
+
+    request.user = {
+      id: isValidToken.id,
+      role: isValidToken.role
+    }
 
     if (!isValidToken) throw new BadRequestException('Час сесії вичерпався')
 
