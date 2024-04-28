@@ -4,6 +4,7 @@ import ProfilEditForm from '~/containers/forms/ProfilEditForm'
 import UserInfo from '~/containers/profile/UserInfo'
 
 import { CircleUserRound, UserRoundCog, BookMarked } from 'lucide-react'
+import UserRequests from '~/containers/profile/UserRequests'
 
 export const tabsData: ProfileTabsData = {
   [ProfileTabsEnum.Profile]: {
@@ -13,7 +14,7 @@ export const tabsData: ProfileTabsData = {
   },
   [ProfileTabsEnum.Posts]: {
     title: 'Posts',
-    content: <div>Posts</div>,
+    content: <UserRequests />,
     icon: <BookMarked />
   },
   [ProfileTabsEnum.EditProfile]: {

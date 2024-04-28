@@ -45,7 +45,7 @@ export type RequestType = {
   content: string
   category: (typeof Categories)[keyof typeof Categories]
   isActive: boolean
-  user_id: number
+  user_id: string
   user: {
     firstName: string
     lastName: string

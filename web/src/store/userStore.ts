@@ -1,8 +1,7 @@
 import { create } from 'zustand'
 import { userService } from '~/services/user'
-import type { UserFormType, UserType } from '~/types'
+import type { UserFormType, UserType, RequestType } from '~/types'
 import { Role } from '~/constants/enums'
-import { Requests as requests } from '~/constants/requestsUrls'
 import { toast } from 'sonner'
 
 type UserStore = {
@@ -11,6 +10,10 @@ type UserStore = {
   getUser: (id: string) => Promise<void>
   updateUser: (user: UserFormType) => void
   deleteUser: () => Promise<void>
+  requestById: (id: string) => RequestType | undefined
+  createRequest: (request: RequestType) => void
+  updataRequest: (request: RequestType) => void
+  deleteRequest: (id: string) => void
   isLoading: boolean
   error: unknown
 }
@@ -60,6 +63,33 @@ export const useUserStore = create<UserStore>((set, get) => ({
     } catch (error) {
       set({ error, isLoading: false })
     }
+  },
+  requestById: (id) => {
+    const user = get().user
+    if (!user) return
+    const request = user.requests.find((request) => request.id === id)
+    if (request) return request
+    return undefined
+  },
+  updataRequest: (request) => {
+    const user = get().user
+    if (!user) return
+    const updatedRequests = user.requests.map((item) =>
+      item.id === request.id ? { ...item, ...request } : item
+    )
+    set({ user: { ...user, requests: updatedRequests } })
+  },
+  createRequest: (request) => {
+    const user = get().user
+    if (!user) return
+    const updatedRequests = [request, ...user.requests]
+    set({ user: { ...user, requests: updatedRequests } })
+  },
+  deleteRequest: (id) => {
+    const user = get().user
+    if (!user) return
+    const updatedRequests = user.requests.filter((request) => request.id !== id)
+    set({ user: { ...user, requests: updatedRequests } })
   },
   isLoading: false,
   error: null
