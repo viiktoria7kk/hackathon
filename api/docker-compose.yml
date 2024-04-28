@@ -48,6 +48,14 @@ services:
       - hackathon
     volumes:
       - pgdata:${POSTGRES_PGDATA}
+  mail:
+    image: maildev/maildev
+    container_name: mail
+    ports:
+      - '1080:1080'
+      - '1025:1025'
+    networks:
+      - hackathon
 
 volumes:
   pgdata:

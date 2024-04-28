@@ -50,7 +50,6 @@ model Posts {
   content String
   category Categories
   isActive Boolean @default(true) @map("is_active")
-  user_id String
   createdAt DateTime @default(now()) @map("created_at")
   userId String
   user User @relation(fields: [userId], references: [id])
