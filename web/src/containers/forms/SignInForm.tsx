@@ -42,6 +42,7 @@ const SignInForm: FC = () => {
       .then((res) => {
         toast.success('Успішно увійшли')
         localStorage.setItem('ACCESS_TOKEN', res.accessToken)
+        localStorage.setItem('USER_ID', res.id)
         navigate(Routes.HOME)
       })
       .catch((error) => {

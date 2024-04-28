@@ -15,7 +15,9 @@ import {
 import { AuthGuard } from '@core/guards/auth.guard'
 import { FileInterceptor } from '@nestjs/platform-express'
 import { IFile } from '@seishinverse/storage-manager'
+import { ApiTags } from '@nestjs/swagger'
 
+@ApiTags('Users')
 @Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) {}

@@ -75,6 +75,7 @@ export type SignInParams = {
 
 export type SignInResponse = {
   accessToken: string
+  id: string
 }
 
 export type SignUpParams = {
