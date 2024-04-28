@@ -1,12 +1,7 @@
 import { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Toaster } from 'sonner'
-<<<<<<< HEAD
 import { useUserStore } from './store/userStore'
-=======
-
-import { useUserStore } from '~/store/userStore'
->>>>>>> 7a4c183 (added useDebounce, small fix)
 
 const App = () => {
   const { getUser } = useUserStore()

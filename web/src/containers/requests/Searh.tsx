@@ -3,8 +3,7 @@ import { SearchIcon } from 'lucide-react'
 import CategorySelect from '~/containers/CategorySelect'
 import { Input } from '~/components/Input'
 import { Button } from '~/components/Button'
-import { FC, useEffect, useState } from 'react'
-import { useDebounce } from '~/hooks/useDebounce'
+import { FC, useState } from 'react'
 
 type SearchProps = {
   setSearchTerm: (searchTerm: string) => void
@@ -13,11 +12,6 @@ type SearchProps = {
 
 const Search: FC<SearchProps> = ({ setSearchTerm, searchTerm }) => {
   const [inputValue, setInputValue] = useState(searchTerm)
-  const debouncedSetSearchTerm = useDebounce(setSearchTerm, 500)
-
-  useEffect(() => {
-    debouncedSetSearchTerm(inputValue)
-  }, [inputValue, debouncedSetSearchTerm])
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value)
@@ -25,7 +19,6 @@ const Search: FC<SearchProps> = ({ setSearchTerm, searchTerm }) => {
       setSearchTerm('')
     }
   }
-
   const handleSearchClick = () => {
     setSearchTerm(inputValue)
   }

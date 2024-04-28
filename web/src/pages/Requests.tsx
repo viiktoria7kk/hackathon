@@ -28,10 +28,12 @@ const Requests = () => {
       <Skeleton className='h-52 w-full mb-5 bg-zinc-300' key={index} />
     ))
   }
+
   const filteredRequests = requests.filter(
     (request) =>
-      request.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      (category === 'all' ? true : request.category === category)
+      (searchTerm === '' ||
+        request.title.toLowerCase().includes(searchTerm.toLowerCase())) &&
+      (category === 'all' || request.category === category)
   )
 
   useEffect(() => {
