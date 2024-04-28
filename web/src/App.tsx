@@ -1,7 +1,5 @@
-import { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Toaster } from 'sonner'
-import { useUserStore } from './store/userStore'
 
 const App = () => {
   return (

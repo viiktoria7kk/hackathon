@@ -6,7 +6,8 @@ import { Categories } from '~/containers/home/constants'
 export enum ProfileTabsEnum {
   Profile = 'profile',
   Posts = 'posts',
-  EditProfile = 'edit-profile'
+  EditProfile = 'edit-profile',
+  Chats = 'chats'
 }
 
 export type ProfileTab = {
