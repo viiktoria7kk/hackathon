@@ -65,15 +65,3 @@ const Request = () => {
 }
 
 export default Request
-
-          </div>
-          <Button onClick={handlePingMessage}>
-            Надіслати сповіщення на пошту
-          </Button>
-        </article>
-      </div>
-    </Wrapper>
-  )
-}
-
-export default Request
