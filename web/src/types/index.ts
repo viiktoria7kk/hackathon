@@ -7,8 +7,11 @@ export type UserType = {
   lastName: string
   email: string
   role: Role.USER | Role.VOLUNTEER
-  avatar: string
+  avatar: string | null
   password: string
+  bio?: string
+  phone?: string
+  requests: RequestType[]
 }
 
 export type RequestType = {
