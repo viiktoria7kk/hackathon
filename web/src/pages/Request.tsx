@@ -1,6 +1,7 @@
 import { User2Icon } from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
 import { Badge } from '~/components/Badge'
+import { buttonVariants } from '~/components/Button'
 import Wrapper from '~/containers/layouts/Wrapper'
 import { useRequestsStore } from '~/store/requestsStore'
 import { normalizeDate } from '~/utils'
@@ -46,7 +47,9 @@ const Request = () => {
               </div>
             </div>
           </div>
-          <Link to={`/chat/${request.user_id}`}>Надіслати повідомлення</Link>
+          <Link className={buttonVariants()} to={`/chat/${request.user_id}`}>
+            Надіслати повідомлення
+          </Link>
         </article>
       </div>
     </Wrapper>

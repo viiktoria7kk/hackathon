@@ -29,6 +29,13 @@ const Header: FC = () => {
                 <>
                   <Link
                     className={cn(buttonVariants({ variant: 'ghost' }))}
+                    to={Routes.BANKA}
+                    target='_blank'
+                  >
+                    Підтримати
+                  </Link>
+                  <Link
+                    className={cn(buttonVariants({ variant: 'ghost' }))}
                     to={Routes.REQUESTS}
                   >
                     Запити
@@ -42,6 +49,13 @@ const Header: FC = () => {
                 </>
               ) : (
                 <>
+                  <Link
+                    className={cn(buttonVariants({ variant: 'ghost' }))}
+                    to={Routes.BANKA}
+                    target='_blank'
+                  >
+                    Підтримати
+                  </Link>
                   <Link
                     className={cn(buttonVariants({ variant: 'ghost' }))}
                     to={Routes.SIGN_UP}

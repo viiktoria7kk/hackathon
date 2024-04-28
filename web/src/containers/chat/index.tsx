@@ -1,31 +1,32 @@
 import { ArrowLeft } from 'lucide-react'
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { Routes } from '~/constants/routes'
 import ChatBody from './ChatContainer'
+import { user } from '~/store/userStore'
 import { createUrlPath } from '~/utils'
-import { userService } from '~/services/user'
-import { useEffect, useState } from 'react'
-import { UserType } from '~/types'
+// import { userService } from '~/services/user'
+// import { useEffect, useState } from 'react'
+// import { UserType } from '~/types'
 
 const ChatContainer = () => {
-  const { id } = useParams<{ id: string }>()
-  const [userInfo, setUserInfo] = useState<UserType | null>(null)
+  // const { id } = useParams<{ id: string }>()
+  // const [userInfo, setUserInfo] = useState<UserType | null>(null)
 
-  useEffect(() => {
-    if (id) {
-      userService
-        .getUser(id)
-        .then((res) => {
-          setUserInfo(res)
-        })
-        .catch((err) => {
-          console.error(err)
-        })
-    }
-  }, [id])
+  // useEffect(() => {
+  //   if (id) {
+  //     userService
+  //       .getUser(id)
+  //       .then((res) => {
+  //         setUserInfo(res)
+  //       })
+  //       .catch((err) => {
+  //         console.error(err)
+  //       })
+  //   }
+  // }, [id])
 
-  const { avatar, firstName, lastName, phone } = userInfo
+  const { avatar, firstName, lastName, phone } = user
   return (
     <div className='w-full h-full flex flex-col justify-center items-center py-4'>
       <header className='w-4/5 h-full flex items-start justify-between bg-zinc-300 p-8'>

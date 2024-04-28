@@ -21,11 +21,10 @@ const ChatBody = () => {
   }
 
   useEffect(() => {
-    socket.current = io(import.meta.env.VITE_SERVER_URL + 'chat/message')
+    socket.current = io(import.meta.env.VITE_SERVER_URL + 'chat')
     setUserId(localStorage.getItem('user_id'))
 
     socket.current.on('response', (message: string) => {
-      console.log(1, message)
       setMessages((prevMessages) => [...prevMessages, JSON.parse(message)])
     })
 
