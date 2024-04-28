@@ -19,21 +19,6 @@ export class ChatService {
     return this.prisma.chat.findMany()
   }
 
-  getMessagesBySender(senderId: string): Promise<Chat[]> {
-    return this.prisma.chat.findMany({
-      where: {
-        senderId
-      }
-    })
-  }
-
-  getMessagesByReceiver(receiverId: string): Promise<Chat[]> {
-    return this.prisma.chat.findMany({
-      where: {
-        receiverId
-      }
-    })
-  }
 
   #clients: Socket[]
   setClients(clients: Socket[]) {
