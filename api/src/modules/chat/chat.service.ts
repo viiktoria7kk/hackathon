@@ -1,13 +1,15 @@
 import { PrismaService } from '@core/prisma/prisma.service'
 import { Injectable } from '@nestjs/common'
-import { Prisma, Chat } from '@prisma/client'
+import { Chat } from '@prisma/client'
 import { Socket } from 'socket.io'
 
 @Injectable()
 export class ChatService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) {
+    this.#clients = []
+  }
 
-  createMessage(data: Prisma.ChatCreateInput) {
+  createMessage(data: Chat): Promise<Chat> {
     return this.prisma.chat.create({
       data
     })
@@ -15,6 +17,22 @@ export class ChatService {
 
   getMessages(): Promise<Chat[]> {
     return this.prisma.chat.findMany()
+  }
+
+  getMessagesBySender(senderId: string): Promise<Chat[]> {
+    return this.prisma.chat.findMany({
+      where: {
+        senderId
+      }
+    })
+  }
+
+  getMessagesByReceiver(receiverId: string): Promise<Chat[]> {
+    return this.prisma.chat.findMany({
+      where: {
+        receiverId
+      }
+    })
   }
 
   #clients: Socket[]
@@ -32,5 +50,12 @@ export class ChatService {
 
   removeClient(client: Socket) {
     this.#clients = this.#clients.filter((c) => c.id !== client.id)
+  }
+
+  getClientId(id: string) {
+    if (this.#clients) {
+      return this.#clients.find((c) => c.id === id)
+    }
+    return null
   }
 }

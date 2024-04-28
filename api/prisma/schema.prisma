@@ -39,9 +39,7 @@ model User {
   role       Roles    @default(USER)
   avatar String?
   posts Posts[]
-  chats Chat[]
-  messages Messages[]
-  
+
   @@map("users")
 }
 
@@ -61,24 +59,10 @@ model Posts {
 
 model Chat {
   id String @id @default(uuid())
-  user_id String
-  user User @relation(fields: [user_id], references: [id])
+  senderId String @map("sender_id")
+  receiverId String @map("receiver_id")
   createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @default(now()) @map("updated_at")
-  messages Messages[]
+  content String
 
   @@map("chat")
-}
-
-model Messages {
-  id String @id @default(uuid())
-  chat_id String
-  chat Chat @relation(fields: [chat_id], references: [id])
-  content String
-  user_id String
-  user User @relation(fields: [user_id], references: [id])
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @default(now()) @map("updated_at")
-
-  @@map("messages")
 }

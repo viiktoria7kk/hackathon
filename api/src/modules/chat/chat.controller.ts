@@ -1,6 +1,6 @@
-import { Controller, Get } from '@nestjs/common'
+import { Controller, Get, Post, Body } from '@nestjs/common'
 import { ChatService } from './chat.service'
-import { Socket } from 'socket.io'
+import { Chat } from '@prisma/client'
 
 @Controller('chat')
 export class ChatController {
@@ -11,23 +11,18 @@ export class ChatController {
     return this.chatService.getMessages()
   }
 
-  @Get('/clients')
-  async getClients() {
-    return this.chatService.getClients()
+  @Post('/message')
+  async createMessage(@Body() data: Chat) {
+    return this.chatService.createMessage(data)
   }
 
-  @Get('/add-client')
-  async addClient(client: Socket) {
-    return this.chatService.addClient(client)
+  @Post('/message/sender')
+  async getMessagesBySender(@Body() data: { senderId: string }) {
+    return this.chatService.getMessagesBySender(data.senderId)
   }
 
-  @Get('/remove-client')
-  async removeClient(client: Socket) {
-    return this.chatService.removeClient(client)
-  }
-
-  @Get('/set-clients')
-  async setClients(clients: Socket[]) {
-    return this.chatService.setClients(clients)
+  @Post('/message/receiver')
+  async getMessagesByReceiver(@Body() data: { receiverId: string }) {
+    return this.chatService.getMessagesByReceiver(data.receiverId)
   }
 }
