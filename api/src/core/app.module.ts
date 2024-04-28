@@ -7,8 +7,9 @@ import { MailModule } from '@core/mail/mail.module'
 
 import { AuthModule } from '@modules/auth/auth.module'
 import { UsersModule } from '@modules/users/users.module'
-import { PostsModule } from '@modules/posts/posts.module'
 import { HealthcheckModule } from '@modules/healthcheck/healthcheck.module'
+import { PostsModule } from '@modules/posts/posts.module'
+import { ChatModule } from '@modules/chat/chat.module'
 
 @Module({
   imports: [
@@ -19,7 +20,9 @@ import { HealthcheckModule } from '@modules/healthcheck/healthcheck.module'
     UsersModule,
     MailModule,
     PostsModule,
-    HealthcheckModule
+    HealthcheckModule,
+    ChatModule,
+    PostsModule
   ]
 })
 export class AppModule {}

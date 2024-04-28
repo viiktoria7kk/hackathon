@@ -41,7 +41,9 @@ export class PostsService {
 
   async createPost(data: Posts): Promise<Posts> {
     try {
-      return await this.prisma.posts.create({ data })
+      return await this.prisma.posts.create({
+        data
+      })
     } catch (error) {
       throw error
     }
@@ -82,6 +84,19 @@ export class PostsService {
   async getPostsByAuthor(userId: string): Promise<Posts[]> {
     return await this.prisma.posts.findMany({
       where: { userId }
+    })
+  }
+
+  async getPostsByTitleAndCategory(params: {
+    title: string
+    category: Categories
+  }): Promise<Posts[]> {
+    const { title, category } = params
+    return await this.prisma.posts.findMany({
+      where: {
+        title,
+        category
+      }
     })
   }
 }

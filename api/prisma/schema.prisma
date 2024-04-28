@@ -39,7 +39,7 @@ model User {
   role       Roles    @default(USER)
   avatar String?
   posts Posts[]
-  
+
   @@map("users")
 }
 
@@ -51,8 +51,18 @@ model Posts {
   category Categories
   isActive Boolean @default(true) @map("is_active")
   createdAt DateTime @default(now()) @map("created_at")
-  userId String
+  userId String @map("user_id")
   user User @relation(fields: [userId], references: [id])
 
   @@map("posts")
+}
+
+model Chat {
+  id String @id @default(uuid())
+  senderId String @map("sender_id")
+  receiverId String @map("receiver_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  content String
+
+  @@map("chat")
 }

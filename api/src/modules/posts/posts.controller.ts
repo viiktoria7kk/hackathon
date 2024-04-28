@@ -8,6 +8,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   UseGuards
 } from '@nestjs/common'
 import { AuthGuard } from '@core/guards/auth.guard'
@@ -60,5 +61,16 @@ export class PostsController {
   @Get('author/:user_id')
   async getPostsByAuthor(@Param('user_id') user_id: string): Promise<Posts[]> {
     return await this.postsService.getPostsByAuthor(user_id)
+  }
+
+  @Get('filter/tc')
+  async getPostsByTitleAndCategory(
+    @Query('title') title: string,
+    @Query('category') category: Categories
+  ): Promise<Posts[]> {
+    return await this.postsService.getPostsByTitleAndCategory({
+      title,
+      category
+    })
   }
 }
