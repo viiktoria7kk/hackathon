@@ -12,7 +12,10 @@ import {
 } from '@nestjs/common'
 import { AuthGuard } from '@core/guards/auth.guard'
 import { IUserRequestPayload, User } from '@core/decorators/user.decorator'
+import { ApiTags } from '@nestjs/swagger'
+import { CreatePostDto } from './dto/create.post.dto'
 
+@ApiTags('Posts')
 @Controller('posts')
 export class PostsController {
   constructor(private postsService: PostsService) {}
@@ -35,13 +38,11 @@ export class PostsController {
 
   @UseGuards(AuthGuard)
   @Post()
-  async createPost(@Body() data: Posts): Promise<Posts> {
+  async createPost(@Body() data: CreatePostDto): Promise<Posts> {
     return await this.postsService.createPost(data)
   }
 
   @UseGuards(AuthGuard)
-<<<<<<< HEAD
-=======
   @Post(':id/respond')
   async respondToPost(
     @Param('id') id: string,
@@ -50,7 +51,6 @@ export class PostsController {
     return this.postsService.respondToPost(id, user.id)
   }
 
->>>>>>> 2be4c3f (feature: added responding to posts)
   @Put('/:id')
   async updatePost(
     @Param('id') id: string,

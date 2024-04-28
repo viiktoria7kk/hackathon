@@ -9,6 +9,7 @@ import { Categories, Posts, Roles } from '@prisma/client'
 import { MailService } from '@core/mail/mail.service'
 import { env } from '@core/configs/env.config'
 import { IUserRequestPayload } from '@core/decorators/user.decorator'
+import { CreatePostDto } from './dto/create.post.dto'
 
 @Injectable()
 export class PostsService {
@@ -50,7 +51,7 @@ export class PostsService {
     }
   }
 
-  async createPost(data: Posts): Promise<Posts> {
+  async createPost(data: CreatePostDto): Promise<Posts> {
     try {
       return await this.prisma.posts.create({
         data
